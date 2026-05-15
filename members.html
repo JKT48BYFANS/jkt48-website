@@ -25,6 +25,8 @@
                 background-position: center;
                 background-repeat: no-repeat;
                 background-attachment: fixed;
+                max-width: 100%;
+                overflow-x: hidden;
             }
 
             .page {
@@ -889,8 +891,13 @@
                 object-fit: contain;
             }
 
-            /* ================= RESPONSIVE KHUSUS HALAMAN MEMBER ================= */
-@media (max-width: 768px) {
+/* ================= RESPONSIVE KHUSUS HALAMAN MEMBER ================= */
+
+    @media (max-width: 768px) {
+
+    * {
+        box-sizing: border-box;
+    }
 
     body {
         overflow-x: hidden;
@@ -898,162 +905,153 @@
     }
 
     .content {
-        margin-top: 70px;
         width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        margin-top: 70px;
     }
 
     .top-header {
-        justify-content: flex-start;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 12px 10px;
-        gap: 8px;
-        box-sizing: border-box;
-        white-space: nowrap;
-    }
-
-    .top-header::-webkit-scrollbar {
-        display: none;
+        width: 100%;
+        max-width: 100vw;
+        overflow: hidden;
+        justify-content: center;
+        padding: 10px 4px;
+        gap: 3px;
     }
 
     .header-left,
     .header-right {
         position: static;
         display: flex;
-        gap: 8px;
+        gap: 3px;
         flex-shrink: 0;
     }
 
     .header-btn {
-        font-size: 11px;
-        padding: 6px 9px;
+        min-width: 0;
+        font-size: 7px;
+        padding: 5px 4px;
         border-width: 2px;
-        border-radius: 8px;
-        flex-shrink: 0;
+        border-radius: 7px;
+        white-space: nowrap;
     }
 
-    .title-box {
-        margin-top: 45px;
-        padding: 6px 10px;
-        max-width: calc(100% - 28px);
-        box-sizing: border-box;
+    .header-right .header-btn {
+        font-size: 7px;
+        padding: 5px 4px;
     }
-
-    .title {
-        font-size: 16px;
-        letter-spacing: 1px;
-    }
-
-    .main-title {
-        font-size: 32px;
-        letter-spacing: 0;
-        line-height: 1.1;
-    }
-
-.profile-summary {
-    width: calc(100% - 28px);
-    padding: 8px 6px;
-    box-sizing: border-box;
-    overflow: visible;
-}
-
-.summary-line {
-    white-space: nowrap;
-    font-size: 8.5px;
-    line-height: 1.7;
-    letter-spacing: 0.4px;
-}
 
     .filter-sticky-area {
         position: fixed;
-        top: 52px;
+        top: 46px;
         left: 0;
         width: 100%;
-        padding: 0 8px;
-        box-sizing: border-box;
+        max-width: 100vw;
+        padding: 0 4px;
         z-index: 998;
         pointer-events: none;
+        overflow: hidden;
     }
 
-.filter-wrapper {
-    width: calc(100% - 16px);
-    max-height: none;
-    flex-wrap: nowrap;
-    justify-content: center;
-    overflow: visible;
-    gap: 4px;
-    padding: 7px 5px;
-    box-sizing: border-box;
-}
+    .filter-wrapper {
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 3px;
+        padding: 6px 4px;
+        overflow: hidden;
+        pointer-events: auto;
+    }
 
-.filter {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 7px 3px;
-    font-size: 8px;
-    letter-spacing: 0;
-    border-width: 2px;
-    margin: 0;
-    white-space: nowrap;
-}
+    .filter {
+        flex: 1 1 0;
+        min-width: 0;
+        font-size: 7px;
+        padding: 6px 2px;
+        letter-spacing: 0;
+        border-width: 2px;
+        white-space: nowrap;
+    }
 
-.team-slogan-card {
-    width: calc(100% - 28px);
-    max-width: none;
-    box-sizing: border-box;
-    overflow: visible;
-    padding: 7px 6px;
-}
+    .title-box {
+        margin-top: 50px;
+        max-width: calc(100vw - 96px);
+        padding: 6px 8px;
+    }
 
-.team-slogan-text {
-    white-space: nowrap;
-    font-size: 8px;
-    letter-spacing: 0.2px;
-    line-height: 1.4;
-}
+    .title {
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
 
-.team-logo {
-    display: none;
-    width: 66px;
-    height: 66px;
-    top: 58px;
-    object-fit: contain;
-    z-index: 20;
-}
+    .main-title {
+        font-size: 26px;
+        letter-spacing: 0;
+        line-height: 1.05;
+    }
 
-.team-logo.left {
-    left: 18px;
-}
+    .team-logo {
+        width: 58px;
+        height: 58px;
+        top: 66px;
+        z-index: 20;
+    }
 
-.team-logo.right {
-    right: 18px;
-}
+    .team-logo.left {
+        left: 10px;
+    }
 
-.team-logo.show {
-    display: block;
-    animation: logoIn 0.35s ease forwards, logoPulse 2.4s ease-in-out infinite;
-}
+    .team-logo.right {
+        right: 10px;
+    }
+
+    .profile-summary {
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
+        padding: 8px 5px;
+        overflow: hidden;
+    }
+
+    .summary-line {
+        white-space: nowrap;
+        font-size: 7.3px;
+        letter-spacing: 0;
+        line-height: 1.7;
+    }
+
+    .team-slogan-card {
+        width: calc(100vw - 20px);
+        max-width: calc(100vw - 20px);
+        padding: 7px 5px;
+        overflow: hidden;
+    }
+
+    .team-slogan-text {
+        white-space: nowrap;
+        font-size: 7px;
+        letter-spacing: 0;
+        line-height: 1.4;
+    }
 
     .member-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+        max-width: 100vw;
         gap: 12px 6px;
         padding: 16px 6px 45px;
-        width: 100%;
-        box-sizing: border-box;
+        overflow: hidden;
     }
 
     .member-card {
         width: 100%;
         max-width: 112px;
+        min-width: 0;
         min-height: 178px;
         padding: 9px 5px;
         border-radius: 10px;
         border-width: 2px;
-        box-sizing: border-box;
-    }
-
-    .member-card:hover {
-        transform: translateY(-5px) scale(1.02);
     }
 
     .member-photo {
@@ -1062,10 +1060,10 @@
     }
 
     .member-name {
-        font-size: 9px;
+        font-size: 8.5px;
         margin-top: 10px;
         margin-bottom: 6px;
-        letter-spacing: 0.5px;
+        letter-spacing: 0;
         line-height: 1.25;
     }
 
@@ -1075,11 +1073,12 @@
     }
 
     #scrollTopBtn {
-        right: 12px;
-        bottom: 14px;
-        font-size: 36px;
+        right: 10px;
+        bottom: 12px;
+        font-size: 34px;
     }
 }
+
 
 
         </style>
@@ -1578,6 +1577,7 @@
         }
 
         updateMobileFilterText();
+
         window.addEventListener("resize", () => {
             updateMobileFilterText();
             updateStatusSummary();
