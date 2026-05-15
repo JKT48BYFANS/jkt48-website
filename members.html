@@ -896,6 +896,9 @@
                 display: none;
             }
 
+            .filter-menu-btn {
+                display: none;
+            }
 
 /* ================= RESPONSIVE KHUSUS HALAMAN MEMBER ================= */
 
@@ -1005,25 +1008,65 @@
 
     .filter-sticky-area {
         position: fixed;
-        top: 46px;
+        top: 52px;
         left: 0;
         width: 100%;
-        max-width: 100vw;
-        padding: 0 4px;
+        padding: 0 8px;
+        box-sizing: border-box;
         z-index: 998;
         pointer-events: none;
-        overflow: hidden;
     }
 
     .filter-wrapper {
-        width: 100%;
-        max-width: 100%;
+        width: fit-content;
+        max-width: calc(100vw - 16px);
+        display: flex;
         flex-wrap: nowrap;
-        justify-content: center;
-        gap: 3px;
-        padding: 6px 4px;
-        overflow: hidden;
+        gap: 8px;
+        padding: 8px;
+        box-sizing: border-box;
+        overflow: visible;
         pointer-events: auto;
+    }
+
+    /* HP: semua filter disembunyikan dulu */
+    .filter-wrapper .filter {
+        display: none;
+        font-size: 11px;
+        padding: 8px 12px;
+        border-width: 2px;
+        letter-spacing: 0;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    /* yang tampil cuma filter aktif */
+    .filter-wrapper .filter.active {
+        display: inline-block;
+    }
+
+    /* tombol garis 3 */
+    .filter-menu-btn {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 500px;
+        border: 2px solid #e20514;
+        background: white;
+        color: #e20514;
+        cursor: pointer;
+        font-family: 'Insanibc', sans-serif;
+        font-size: 13px;
+    }
+
+    /* saat menu dibuka, semua filter muncul */
+    .filter-wrapper.open {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: calc(100vw - 16px);
+    }
+
+    .filter-wrapper.open .filter {
+        display: inline-block;
     }
 
     .filter {
@@ -1168,15 +1211,15 @@
                         </div>
                     </div>
 
-                    <div class="filter-sticky-area">
-                        <div class="filter-wrapper">
-                            <button class="filter active" data-filter="SemuaMember">Semua Member</button>
-                            <button class="filter" data-filter="TeamLove">Team Love</button>
-                            <button class="filter" data-filter="TeamDream">Team Dream</button>
-                            <button class="filter" data-filter="TeamPassion">Team Passion</button>
-                            <button class="filter" data-filter="Trainee">Trainee</button>
-                            <button class="filter" data-filter="Virtual">JKT48 Virtual</button>
-                        </div>
+                    <div class="filter-wrapper">
+                        <button class="filter active" data-filter="SemuaMember">Semua Member</button>
+                        <button class="filter" data-filter="TeamLove">Team Love</button>
+                        <button class="filter" data-filter="TeamDream">Team Dream</button>
+                        <button class="filter" data-filter="TeamPassion">Team Passion</button>
+                        <button class="filter" data-filter="Trainee">Trainee</button>
+                        <button class="filter" data-filter="Virtual">JKT48 Virtual</button>
+
+                        <button class="filter-menu-btn" id="filterMenuBtn" onclick="toggleFilterMenu()">☰</button>
                     </div>
 
                     <div class="team-slogan-card" id="teamSloganCard">
@@ -1638,12 +1681,12 @@
             const isMobile = window.innerWidth <= 768;
 
             const labels = {
-                SemuaMember: isMobile ? "Semua" : "Semua Member",
-                TeamLove: isMobile ? "Love" : "Team Love",
-                TeamDream: isMobile ? "Dream" : "Team Dream",
-                TeamPassion: isMobile ? "Passion" : "Team Passion",
-                Trainee: "Trainee",
-                Virtual: isMobile ? "Virtual" : "JKT48 Virtual"
+                SemuaMember: isMobile ? "SEMUA" : "Semua Member",
+                TeamLove: isMobile ? "LOVE" : "Team Love",
+                TeamDream: isMobile ? "DREAM" : "Team Dream",
+                TeamPassion: isMobile ? "PASSION" : "Team Passion",
+                Trainee: isMobile ? "TRAINEE" : "Trainee",
+                Virtual: isMobile ? "VIRTUAL" : "JKT48 Virtual"
             };
 
             document.querySelectorAll(".filter").forEach(btn => {
@@ -1696,6 +1739,9 @@
                     if (filter === "Virtual") document.body.classList.add("bg-virtual");
 
                     setBGM(filter);
+
+                    document.querySelector(".filter-wrapper").classList.remove("open");
+
                 });
             });
 
@@ -1839,6 +1885,11 @@
                 panel.classList.remove("show");
             }
         });
+
+        function toggleFilterMenu() {
+            const wrapper = document.querySelector(".filter-wrapper");
+            wrapper.classList.toggle("open");
+        }
 
     </script>
     </html>
