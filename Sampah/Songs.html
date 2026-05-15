@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Songs JKT48</title>
+
+    <style>
+
+@font-face {
+    font-family: 'Insanibu';
+    src: url('font/Insanibu.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Insanibc';
+    src: url('font/Insanibc.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    font-family: 'Insanibu', sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 0.5s ease-in-out;
+    background-image: url("Background/Background.jpg");
+}
+
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #e20785 15%, #f69220 50%, #e20514);
+    padding: 20px 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,1);
+    gap: 10px;
+}
+
+.header-left {
+    position: absolute;
+    left: 15px;
+}
+
+.header-right {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.header-btn {
+    padding: 5px 10px;
+    font-size: 15px;
+    background-color: #ffffff;
+    color: #e20514;
+    border: 3px solid #e20514;
+    border-radius: 10px;
+    cursor: pointer;    
+    font-family: 'Insanibc', sans-serif;
+}
+
+.header-btn:hover {
+    background-color: #e20514;
+    color: white; 
+}
+
+.header-btn.active {
+    background-color: #e20514;
+    color: white;
+    border: 3px solid white;
+    transform: scale(1.05);
+    cursor: default;
+    pointer-events: none;
+}
+
+.content {
+    margin-top: 90px;
+    text-align: center;
+}
+
+.filter-wrapper {
+    position: sticky;
+    top: 85px;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: auto;
+    padding: 12px 20px;
+    background: rgba(255,255,255,1);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,1);
+    width: fit-content;
+}
+
+.filter {
+    padding: 10px 25px;
+    border-radius: 999px;
+    border: 3px solid #e20514;
+    background: white;
+    cursor: pointer;
+    transition: 0.25s ease;
+    font-family: 'Insanibc', sans-serif;
+    letter-spacing: 1.5px;
+    color: #e20514;
+}
+
+.filter.active {
+    background: #e20514;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.filter:hover {
+    background: #e20514;
+    color: white;
+    transform: scale(1.07);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.song-grid.setlist-mode {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.song-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,1);
+    transition: all 0.3s ease;
+    border: 1px solid #000000;
+    transform: scale(0.95);
+    transform-origin: top center;
+    min-height: 400px;
+}
+
+.song-card:hover {
+    transform: translateY(-8px) scale(1);
+    box-shadow: 0 15px 30px rgba(0,0,0,1);
+    background: #ffc4c4;
+}
+
+.song-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: visible;
+    margin-bottom: 25px;;
+    transition: all 0.3s ease;
+    border-radius: 25px;
+}
+
+.song-image-wrapper img {
+    border: 2.5px solid #000000;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.song-title {
+    margin-top: 5px;
+    font-family: 'Insanibc';
+    font-size: 16px;
+    color: #e20514;
+    line-height: 1.3;
+    height: 42px;      
+    overflow: hidden;
+}
+
+.song-date {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.song-subtitle {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.song-badge {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    color: white;
+    font-family: 'Insanibc';
+    box-shadow: 0 4px 10px rgba(0,0,0,1);
+    z-index: 2;
+    transition: all 0.25s ease;
+}
+
+.song-card:hover .song-badge {
+    transform: translateX(-50%) scale(1.08);
+    box-shadow: 0 8px 18px rgba(0,0,0,1);
+}
+
+.song-code {
+    display: block;        
+    margin: 0 2px;    
+    padding: 5px 12px; 
+    border-radius: 999px;
+    font-size: 11px;
+    background: #ffffff;
+    color: #555;
+    border: 2px solid #ddd;
+    box-shadow: 0 3px 8px rgba(0,0,0,1);
+    transition: all 0.25s ease;
+}
+
+.song-code.now-showing {
+    background: #3dca00;
+    border-color: #3dca00;
+    color: white;
+}
+
+.song-code.setlist {
+    background: #656565;
+    border-color: #656565;
+    color: white;
+}
+
+.song-card:hover .song-code {
+    transform: scale(1.05);
+}
+
+.song-btn {
+    margin-top: 8px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background: #e20514;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.badge-single {
+    background: #1e9bd7;
+}
+
+.song-info-btn {
+    margin-top: 12px;
+    padding: 7px 14px;
+    font-size: 12px;
+    background: #e20514;
+    border: 2px solid #e20514;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0,0,0,1);
+    transition: all 0.25s ease;
+    font-family: 'Insanibu';
+}
+
+.song-card:hover .song-info-btn {
+    background: white;
+    color: #e20514;
+    border: 2px solid #e20514;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,1);
+}
+
+.song-info-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 8px rgba(0,0,0,1);
+}
+
+.song-code {
+    white-space: nowrap;   
+    font-size: 12px;      
+    padding: 5px 10px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.song-code.original {
+    background: #ff3c00;
+    border-color: #ff3c00;
+}
+
+.song-code.sousenkyo {
+    background: #4800ff;
+    border-color: #4800ff;
+}
+
+.song-code.janken {
+    background: #a48300;
+    border-color: #a48300;
+}
+
+.song-code.graduation {
+    background: #ff348c;
+    border-color: #ff348c;
+}
+
+.song-code.double {
+    background: #2c8b00;
+    border-color: #2c8b00;
+}
+
+.song-code.single {
+    background: #1e9bd7;
+    border-color: #1e9bd7;
+}
+
+.song-types {
+    display: flex;
+    justify-content: center;
+    gap: 8px;           
+    flex-wrap: nowrap;
+    margin-top: 8px;
+    padding: 0 6px; 
+}
+
+.song-types .song-code {
+    transition: transform 0.25s ease;
+}
+
+.song-card:hover .song-code {
+    transform: scale(1.05);
+}
+
+.sub-filter-wrapper {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,1);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,1);
+    z-index: 1000;
+}
+
+.song-card.setlist .song-image-wrapper {
+    border-radius: 0 !important;
+    overflow: visible !important;
+    aspect-ratio: auto;
+}
+
+.song-card.setlist .song-image-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.song-card:not(.setlist) .song-image-wrapper {
+    aspect-ratio: 1 / 1;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="top-header">
+
+        <button class="header-btn header-left" onclick="goBackMenu()">
+            < KEMBALI
+        </button>
+
+        <button class="header-btn" onclick="alert('Belum tersedia')">NEWS</button>
+        <button class="header-btn" onclick="alert('Belum tersedia')">SCHEDULE</button>
+        <button class="header-btn" onclick="alert('Belum tersedia')">THEATER</button>
+
+        <button class="header-btn" onclick="goToMember()">MEMBER</button>
+
+        <button class="header-btn" onclick="alert('Belum tersedia')">SISTER GROUP</button>
+
+        <!-- ACTIVE PAGE -->
+        <button class="header-btn active">SONGS</button>
+
+        <button class="header-btn" onclick="alert('Belum tersedia')">TEAMS HISTORY</button>
+
+        <button class="header-btn" onclick="openWithDelay()">
+            REQUEST HOUR 2026
+        </button>
+
+        <div class="header-right">
+            <button class="header-btn" onclick="toggleMute()">🔊</button>
+            <button class="header-btn" onclick="alert('Bantuan belum tersedia')">
+                BANTUAN ?
+            </button>
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <div class="filter-wrapper">
+            <button class="filter active" data-filter="singles">Singel</button>
+            <button class="filter" data-filter="setlist">Setlist</button>
+            <button class="filter" data-filter="songs">Songs</button>
+            <button class="filter" data-filter="albums">Albums</button>
+        </div>
+
+        <div class="song-grid" id="songGrid"></div>
+
+        <div class="sub-filter-wrapper" id="setlistFilter" style="display:none;">
+            <button class="filter active" data-setlist="all">SEMUA</button>
+            <button class="filter" data-setlist="now">NOW SHOWING</button>
+        </div>
+                
+    </div>
+
+</body>
+
+<script>
+
+function goBackMenu() {
+    window.location.href = "Menu.html";
+}
+
+function goToMember() {
+    window.location.href = "Member.html";
+}
+
+function openWithDelay() {
+    setTimeout(() => {
+        window.open("https://rh26.jkt48.com");
+     }, 500);
+}
+
+function toggleMute() {
+    alert("Fitur mute belum disambungkan ke BGM");
+}
+
+function showDevAlert() {
+    alert("Dalam Tahap Pengembangan");
+}
+
+const grid = document.getElementById("songGrid");
+
+const singles = [
+  { no: 1, title: "RIVER", cover: "Singles/1.jpg" },
+  { no: 2, title: "Apakah Kau Melihat Mentari Senja?", cover: "Singles/2.jpg" },
+  { no: 3, title: "Fortune Cookie yang Mencinta", cover: "Singles/3.jpg" },
+  { no: 4, title: "Musim Panas Sounds Good", cover: "Singles/4.jpg" },
+  { no: 5, title: "Flying Get", cover: "Singles/5.jpg" },
+  { no: 6, title: "Gingham Check", cover: "Singles/6.jpg" },
+  { no: 7, title: "Papan Penanda Isi Hati", cover: "Singles/7.jpg" },
+  { no: 8, title: "Angin Sedang Berhembus", cover: "Singles/8.jpg" },
+  { no: 9, title: "Pareo adalah Emerald", cover: "Singles/9.jpg" },
+  { no: 10, title: "Refrain Penuh Harapan", cover: "Singles/10.jpg" },
+  { no: 11, title: "Halloween Night", cover: "Singles/11.jpg" },
+  { no: 12, title: "Beginner", cover: "Singles/12.jpg" },
+  { no: 13, title: "Hanya Lihat Ke Depan", cover: "Singles/13.jpg" },
+  { no: 14, title: "LOVE TRIP", cover: "Singles/14.jpg" },
+  { no: 15, title: "Luar Biasa", cover: "Singles/15.jpg" },
+  { no: 16, title: "So Long!", cover: "Singles/16.jpg" },
+  { no: 17, title: "Indahnya Senyum Manismu dst.", cover: "Singles/17.jpg" },
+  { no: 18, title: "Dirimu Melody", cover: "Singles/18.jpg" },
+  { no: 19, title: "Everyday, Kachuusha", cover: "Singles/19.jpg" },
+  { no: 19, title: "UZA", cover: "Singles/19,2.jpg"},
+  { no: 20, title: "High Tension", cover: "Singles/20.jpg" },
+  { no: 21, title: "Rapsodi", cover: "Singles/21.jpg" },
+  { no: 22, title: "Cara Ceroboh Untuk Mencinta", cover: "Singles/22.jpg" },
+  { no: 23, title: "Flying High", cover: "Singles/23.jpg" },
+  { no: 24, title: "Sayonara Crawl", cover: "Singles/24.jpg" },
+  { no: 25, title: "Magic Hour", cover: "Singles/25.jpg" },
+  { no: 26, title: "#KuSangatSuka", cover: "Singles/26.jpg" },
+  { no: 27, title: "Andai 'Ku Bukan Idola", cover: "Singles/27.jpg" }
+];
+
+const singleTypes = {
+  4: ["1ST Sousenkyo"],
+  10: ["2ND Sousenkyo"],
+  13: ["3RD Sousenkyo"],
+  14: ["Janken Competition"],
+  16: ["Graduation Single"],
+  17: ["4TH Sousenkyo"],
+  18: ["Graduation Single"],
+  19: ["Double Single"],
+  20: ["5TH Sousenkyo"],
+  21: ["Original", "6TH Sousenkyo"],
+  23: ["Original"],
+  24: ["Graduation Single"],
+  25: ["Original"],
+  26: ["7TH Sousenkyou"],
+};
+
+function renderSingles() {
+    grid.innerHTML = "";
+
+    singles.forEach(song => {
+
+        let label = getOrdinal(song.no) + " Single";
+
+        const card = `
+        <div class="song-card">
+            
+            <div class="song-image-wrapper">
+                <img src="${song.cover}" alt="${song.title}">
+
+                <div class="song-badge badge-single">
+                    ${label}
+                </div>
+            </div>
+
+            <div class="song-title">${song.title}</div>
+
+            <div class="song-date"></div>
+
+            <div class="song-types">
+                ${renderTypes(song.no)}
+            </div>
+
+            <button class="song-info-btn" onclick="showDevAlert()">
+                Info Single
+            </button>
+
+        </div>
+        `;
+
+        grid.innerHTML += card;
+    });
+}
+
+function getOrdinal(n) {
+    if (n % 100 >= 11 && n % 100 <= 13) return n + "th";
+
+    switch (n % 10) {
+        case 1: return n + "st";
+        case 2: return n + "nd";
+        case 3: return n + "rd";
+        default: return n + "th";
+    }
+}
+
+function renderTypes(no) {
+    let types = singleTypes[no] || ["Single"];
+
+    return types.map(type => {
+        return `<span class="song-code ${getTypeClass(type)}">${type}</span>`;
+    }).join("");
+}
+
+function getTypeClass(type) {
+    if (type.includes("Original")) return "original";
+    if (type.includes("Sousenkyo")) return "sousenkyo";
+    if (type.includes("Janken")) return "janken";
+    if (type.includes("Graduation")) return "graduation";
+    if (type.includes("Double")) return "double";
+    return "single";
+}
+
+const setlists = [
+  {
+    title: "Pajama Drive",
+    cover: "Setlist/PD.jpg",
+    status: "now"
+  },
+  {
+    title: "Aturan Anti Cinta",
+    cover: "Setlist/RKJ.jpg",
+    status: "all"
+  },
+  {
+    title: "Matahari Milikku",
+    cover: "Setlist/BNT.jpg",
+    status: "all"
+  },
+  {
+    title: "Demi Seseorang",
+    cover: "Setlist/DNTN.jpg",
+    status: "all"
+  },
+  {
+    title: "Gadis-Gadis Remaja",
+    cover: "Setlist/SG.jpg",
+    status: "all"
+  },
+  {
+    title: "Sambil Menggandeng Erat Tanganku",
+    cover: "Setlist/TWT.jpg",
+    status: "now"
+  },
+  {
+    title: "Dewi Theater",
+    cover: "Setlist/TNM.jpg",
+    status: "all"
+  },
+  {
+    title: "Bel Terakhir Berbunyi",
+    cover: "Setlist/SBGN.jpg",
+    status: "all"
+  },
+  {
+    title: "Bunga Matahari",
+    cover: "Setlist/H.jpg",
+    status: "all"
+  },
+  {
+    title: "B•E•L•I•E•V•E TEAM J",
+    cover: "Setlist/BJ.jpg",
+    status: "all"
+  },
+  {
+    title: "B•E•L•I•E•V•E TEAM KIII",
+    cover: "Setlist/BKIII.jpg",
+    status: "all"
+  },
+  {
+    title: "Sekarang Sedang Jatuh Cinta",
+    cover: "Setlist/TR.jpg",
+    status: "all"
+  },
+  {
+    title: "Romansa Sang Gadis",
+    cover: "Setlist/RSG.jpg",
+    status: "all"
+  },
+  {
+    title: "Back Hip Circle (SAKA AGARI)",
+    cover: "Setlist/SA.jpg",
+    status: "all"
+  },
+  {
+    title: "Fajar Sang Idola",
+    cover: "Setlist/INY.jpg",
+    status: "all"
+  },
+  {
+    title: "Tunas di Balik Seragam",
+    cover: "Setlist/SNM.jpg",
+    status: "all"
+  },
+  {
+    title: "Fly Team T",
+    cover: "Setlist/FTT.jpg",
+    status: "all"
+  },
+  {
+    title: "Cara Meminum Ramune",
+    cover: "Setlist/RNM.jpg",
+    status: "now"
+  },
+  {
+    title: "Banzai JKT48",
+    cover: "Setlist/B.jpg",
+    status: "all"
+  },
+  {
+    title: "Ingin Bertemu",
+    cover: "Setlist/A.jpg",
+    status: "all"
+  },
+  {
+    title: "Pertaruhan Cinta",
+    cover: "Setlist/PC.jpg",
+    status: "now"
+  },
+  {
+    title: "KIRA KIRA GIRLS",
+    cover: "Setlist/KKG.jpg",
+    status: "all"
+  },
+  {
+    title: "PASSION 200%",
+    cover: "Setlist/P2.jpg",
+    status: "now"
+  },
+  {
+    title: "DREAM BAKUDAN",
+    cover: "Setlist/DB.jpg",
+    status: "now"
+  },
+  {
+    title: "ITADAKI♥LOVE",
+    cover: "Setlist/IL.jpg",
+    status: "now"
+  },
+];
+
+function renderSetlists(filter = "all") {
+    grid.innerHTML = "";
+
+    setlists
+    .filter(s => {
+    if (filter === "all") return true;      
+    if (filter === "now") return s.status === "now";
+    return true;
+    })
+
+    .forEach(setlist => {
+
+        const card = `
+        <div class="song-card setlist">
+            
+            <div class="song-image-wrapper">
+                <img src="${setlist.cover}" alt="${setlist.title}">
+
+                <div class="song-badge badge-single">
+                    SETLIST
+                </div>
+            </div>
+
+            <div class="song-title">${setlist.title}</div>
+
+            <div class="song-date"></div>
+
+            <div class="song-types">
+                <span class="song-code ${setlist.status === "now" ? "now-showing" : "setlist"}">
+                    ${setlist.status === "now" ? "NOW SHOWING" : "SETLIST"}
+                </span>
+            </div>
+
+            <button class="song-info-btn" onclick="showDevAlert()">
+                Info Setlist
+            </button>
+
+        </div>
+        `;
+
+        grid.innerHTML += card;
+    });
+}
+
+const mainFilters = document.querySelectorAll(".filter[data-filter]");
+const setlistFilter = document.getElementById("setlistFilter");
+
+mainFilters.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        mainFilters.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const type = btn.dataset.filter;
+
+        if (type === "singles") {
+            setlistFilter.style.display = "none";
+            grid.classList.remove("setlist-mode");
+            renderSingles(); 
+        }
+
+        if (type === "setlist") {
+            setlistFilter.style.display = "flex";
+            grid.classList.add("setlist-mode"); 
+            renderSetlists();
+        }
+    });
+});
+
+const subFilters = document.querySelectorAll("[data-setlist]");
+
+subFilters.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        document.querySelector(".sub-filter-wrapper .active").classList.remove("active");
+        btn.classList.add("active");
+
+        renderSetlists(btn.dataset.setlist);
+    });
+});
+
+renderSingles();
+
+</script>
+
+</html>

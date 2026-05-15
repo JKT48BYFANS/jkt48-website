@@ -1,0 +1,1352 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+
+            <title>Member JKT48</title>
+
+            <style>
+
+            body {
+                margin: 0;
+                font-family: 'Insanibu', sans-serif;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                transition: background-image 0.5s ease-in-out;
+            }
+            
+                body > * {
+                position: relative;
+                z-index: 1;
+            }
+
+                .page {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+                
+                .top-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(90deg, #ff8514 16.5%, #ff3891 66.5%, #e20514);
+                padding: 20px 0;
+                z-index: 1000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                gap: 10px;
+            }
+            
+                .header-left {
+                position: absolute;
+                left: 15px;
+            }
+                
+                .header-right {
+                position: absolute;
+                right: 15px;
+            }
+
+                .header-content {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #ffffff;
+                font-size: 40px;
+            }
+
+                .header-btn {
+                padding: 6px 12px;
+                font-size: 14px;
+                background-color: #ffffff;
+                color: #e20514;
+                border: 2px solid #e20514;
+                border-radius: 8px;
+                cursor: pointer;    
+                font-family: 'Insanibc', sans-serif;
+            }
+
+                .header-btn:hover {
+                background-color: #e20514;
+                color: white; 
+            }
+
+                .header-btn.active {
+                background-color: #e20514;
+                color: white;
+                border: 2px solid white;
+                transform: scale(1.05);
+            }
+                
+                .header-right {
+                position: absolute;
+                right: 15px;
+                display: flex;
+                gap: 8px;
+            }
+
+                .header-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                position: relative;
+                z-index: 10;
+                overflow: visible;
+            }
+
+                .content {
+                margin-top: 85px; 
+                text-align: center;
+            }
+            
+                @keyframes cardIn {
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+                #pageTransition {
+                position: fixed;
+                inset: 0;
+                background: white;
+                z-index: 9999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            <div id="pageTransition"></div>
+
+            <audio id="bgMusic" preload="auto"></audio>
+            
+            <div class="content">
+            
+            <div class="header-section">
+                <div class="title-box">
+                    <h2 class="title">PROFIL LENGKAP</h2>
+                    <h1 class="main-title">Member JKT48</h1>
+                </div>
+
+                <div class="profile-summary">
+                    <div class="summary-line" id="summaryMember">
+                        Loading...
+                    </div>
+
+                    <div class="summary-line" id="summaryStatus">
+                        Loading...
+                    </div>
+                </div>        
+
+                <div class="filter-wrapper">
+                    <button class="filter active" data-filter="SemuaMember">Semua Member</button>
+                    <button class="filter" data-filter="TeamLove">Team Love</button>
+                    <button class="filter" data-filter="TeamDream">Team Dream</button>
+                    <button class="filter" data-filter="TeamPassion">Team Passion</button>
+                    <button class="filter" data-filter="Trainee">Trainee</button>
+                    <button class="filter" data-filter="Virtual">JKT48 Virtual</button>
+                </div>
+            </div>
+
+            <!-- GRID -->
+            <div class="member-grid" id="memberGrid"></div>    
+            
+            <div class="top-header">
+                
+                    <button class="header-btn header-left" data-page="home" onclick="goBackMenu()">
+                        🏡 KEMBALI
+                    </button>
+
+                    <button class="header-btn" data-page="news" onclick="window.location.href='News.html'">
+                        NEWS
+                    </button>
+
+                    <button class="header-btn" data-page="schedule" onclick="window.location.href='Schedule.html'">
+                    SCHEDULE
+                    </button>
+
+                    <button class="header-btn" data-page="theater" onclick="window.location.href='Theater.html'">
+                        THEATER
+                    </button>
+
+                    <button class="header-btn" data-page="member" onclick="window.location.href='MemberJKT48.html'">
+                        MEMBER
+                    </button>
+
+                    <button class="header-btn" data-page="sister" onclick="window.location.href='Sister.html'">
+                        SISTER GROUP
+                    </button>
+                    
+                    <button class="header-btn" data-page="songs" onclick="window.location.href='Songs.html'">
+                        SONGS
+                    </button>
+
+                    <button class="header-btn" onclick="openWithDelay()">
+                    🕰️ REQUEST HOUR 2026  
+                    </button>
+
+                    <div class="header-right">
+                        <button class="header-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+                        <button class="header-btn" onclick="alert('Bantuan belum tersedia')">
+                            🛠️ BANTUAN 
+                        </button>
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+            
+        <style>
+
+                .title {
+                font-size: 25px;
+                margin-top: 10px;
+                margin-bottom: 1px;
+                color: #000000;
+                letter-spacing: 2px;
+                font-family: 'Insanibu', sans-serif;
+            }
+                .main-title {
+                font-size: 50px;
+                color: #e20514;
+                margin-top: 1px;
+                margin-bottom: 5px;
+                margin-left: 10px;
+                margin-right: 10px;
+                letter-spacing: 1px;
+                font-family: 'Insanibc', sans-serif;
+            }
+
+                .title-box {
+                background: rgba(255, 255, 255);
+                padding: 5px 10px;
+                border-radius: 20px;
+                display: inline-block;
+                box-shadow: 
+                    0 10px 25px rgba(0,0,0,0.25),
+                    0 20px 50px rgba(0,0,0,0.15);
+                margin-bottom: 5px;
+                border: 1px solid #000000;
+                transition: all 0.3s ease;
+            }
+
+                .title-box:hover {
+                transform: translateY(-8px) scale(1.03);
+                box-shadow: 
+                    0 20px 40px rgba(0,0,0,0.35),
+                    0 30px 70px rgba(0,0,0,0.2);
+                background: rgba(255, 255, 255);    
+            }
+
+                .team-title {
+                grid-column: 1 / -1;
+                text-align: center;
+                font-size: 25px;
+                padding: 10px 20px;
+                margin: 25px 0 10px 0;
+                border-radius: 12px;
+                letter-spacing: 2px;
+                border: 2px solid black;
+                background: white;
+                box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+                transition: 0.3s;
+            }
+
+                .team-title:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+            }
+
+                .team-title.TeamLove {
+                background: rgb(255, 235, 245);
+                border-color: rgb(226, 7, 133);
+                color: rgb(226, 7, 133);
+            }
+
+                .team-title.TeamDream {
+                background: rgb(225, 255, 255);
+                border-color: rgb(0, 164, 165);
+                color: rgb(0, 164, 165);
+            }
+
+                .team-title.TeamPassion {
+                background: rgb(255, 245, 235);
+                border-color: rgb(246, 146, 32);
+                color: rgb(246, 146, 32);
+            }
+
+                .team-title.Trainee {
+                background: rgb(255, 250, 196);
+                border-color: rgb(196, 120, 120);
+                color: rgb(196, 120, 120);
+            }
+
+                .team-title.Virtual {
+                background: rgb(225, 225, 255);
+                border-color: rgb(3, 70, 192);
+                color: rgb(3, 70, 192);
+            }
+
+                .profile-summary {
+                background: rgba(255, 255, 255, 0.95);
+                padding: 10px 20px;
+                border-radius: 15px;
+                border: 1px solid #000;
+                box-shadow: 
+                    0 6px 15px rgba(0,0,0,0.2),
+                    0 12px 25px rgba(0,0,0,0.1);
+                margin-bottom: 15px;
+                display: inline-block;
+                transition: 0.3s;
+            }
+
+                .profile-summary:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+
+                .summary-line {
+                font-size: 14px;
+                color: #333;
+                white-space: nowrap;
+                letter-spacing: 2.5px;
+            }
+
+                .filter-wrapper {
+                position: sticky;
+                top: 85px; 
+                z-index: 999;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 14px;
+                margin: auto;
+                padding: 12px 20px;
+                background: rgba(255,255,255,1);
+                backdrop-filter: blur(6px);
+                border-radius: 15px;
+                box-shadow: 0 6px 15px rgba(0,0,0,1);
+                width: fit-content;
+            }
+            
+            .filter {
+                padding: 10px 22px;
+                border-radius: 999px;
+                border: 3px solid;
+                background: white;
+                cursor: pointer;
+                transition: 0.25s ease;
+                font-family: 'Insanibc', sans-serif;
+                letter-spacing: 1.5px;
+                margin: auto;
+            }
+
+            .filter.active {
+                color: #ffffff;
+                transform: scale(1.05);
+            }
+
+            .filter:hover {
+                color: white;
+                transform: scale(1.07);
+                box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            }
+
+
+            [data-filter="SemuaMember"] {
+                border-color: #e20514;
+                color: #e20514;
+            }
+            [data-filter="SemuaMember"].active {
+                background: #e20514;
+                border-color: white;
+            }
+
+            [data-filter="TeamLove"] {
+                border-color: rgb(226, 7, 133);
+                color: rgb(226, 7, 133);
+            }
+
+            [data-filter="TeamLove"].active {
+                background: rgb(226, 7, 133);
+                border-color: white;
+            }
+
+            [data-filter="TeamDream"] {
+                border-color: rgb(0, 164, 165);
+                color: rgb(0, 164, 165);
+            }
+
+            [data-filter="TeamDream"].active {
+                background: rgb(0, 164, 165);
+                border-color: white;
+            }
+
+            [data-filter="TeamPassion"] {
+                border-color: rgb(246, 146, 32);
+                color: rgb(246, 146, 32);
+            }
+
+            [data-filter="TeamPassion"].active {
+                background: rgb(246, 146, 32);
+                border-color: white;
+            }
+
+            [data-filter="Trainee"] {
+                border-color: rgb(196, 120, 120);
+                color: rgb(196, 120, 120);
+            }
+
+            [data-filter="Trainee"].active {
+                background: rgb(196, 120, 120);
+                border-color: white;
+            }
+
+            [data-filter="Virtual"] {
+                border-color: rgb(3, 70, 192);
+                color: rgb(3, 70, 192);
+            }
+
+            [data-filter="Virtual"].active {
+                background: rgb(3, 70, 192);
+                border-color: white;
+            }
+
+            [data-filter="SemuaMember"]:hover {
+                background: #e20514;
+                border-color: rgb(255, 255, 255);
+            }
+
+            [data-filter="TeamLove"]:hover {
+                background: rgb(226, 7, 133);
+                border-color: rgb(255, 255, 255);
+            }
+
+            [data-filter="TeamDream"]:hover {
+                background: rgb(0, 164, 165);
+                border-color: rgb(255, 255, 255);
+            }
+
+            [data-filter="TeamPassion"]:hover {
+                background: rgb(246, 146, 32);
+                border-color: rgb(255, 255, 255);
+            }
+
+            [data-filter="Trainee"]:hover {
+                background: rgb(196, 120, 120);
+                border-color: rgb(255, 255, 255);
+            }
+
+            [data-filter="Virtual"]:hover {
+                background: rgb(3, 70, 192);
+                border-color: rgb(255, 255, 255);
+            }
+
+            .member-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 270px);
+                gap: 22px;
+                padding: 30px;
+                justify-items: center;
+                grid-auto-flow: row;
+                padding-bottom: 80px;
+                justify-content: center;
+            }
+
+            .member-card {
+                width: 200px;
+                min-height: 240px;
+                border-radius: 12px;
+                padding: 20px 14px;
+                text-align: center;
+                border: 3px solid #e20514;
+                box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+                transition: 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: #ffffff;
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                animation: cardIn 0.5s ease forwards;
+                cursor: pointer;
+                margin-top: 1px;
+                margin-bottom: 15px;
+                position: relative;
+            }
+
+            .member-card:hover {
+                transform: translateY(-5px) scale(1.05);
+                box-shadow: 0 5px 10px rgb(6, 6, 6);
+            }
+
+            .member-card.show {
+                animation: cardIn 0.5s ease forwards;
+            }
+
+            .photo-frame {
+                width: 159px;
+                height: 215px;
+                background: url("Frame.jpg") no-repeat center;
+                background-size: contain;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                box-shadow: 0 10px 15px rgba(0,0,0,1);
+                position: relative;
+            }
+
+            .member-name {
+                font-size: 15px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                color: #e20514;
+                letter-spacing: 2.5px;
+            }
+
+                .member-gen {
+                background: #e20514;
+                color: white;
+                font-size: 12px;
+                padding: 4px 10px;
+                border-radius: 999px;
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+
+                .member-card.empty {
+                visibility: hidden;
+            }
+
+                .member-grid.fade-out {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+                filter: blur(4px);
+                transition: all 0.35s ease;
+            }
+            
+                .member-grid.fade-in {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+                transition: all 0.45s ease;
+            }   
+                
+                .member-grid {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+                .member-photo {
+                width: 125px; 
+                height: 180px;
+                object-fit: cover;
+            }
+
+                .profile-btn {
+                margin-top: 20px;
+                padding: 8px 12px;
+                font-size: 12px;
+                border-radius: 8px;
+                border: none;
+                background: #e20514;
+                color: white;
+                cursor: pointer;
+                transition: 0.25s;
+            }
+
+                .profile-btn:hover {
+                background: #b8000f;
+                transform: scale(1.05);
+            }
+
+                .kapten-badge {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #e20514;
+                color: #ffffff;
+                padding: 6px 0;
+                font-size: 12px;
+                letter-spacing: 2px;
+                text-align: center;
+                font-family: 'Insanibc', sans-serif;
+            }
+
+                .announced-badge {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+                padding: 6px 0;
+                font-size: 12px;
+                letter-spacing: 0.5px;
+                text-align: center;
+            }
+
+                .card-badge {
+                position: absolute;
+                top: -25px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 50px;
+                z-index: 2;
+            }
+            
+                .member-card.status-hiatus .photo-frame {
+                filter: grayscale(62%) !important;
+            }
+                
+                .member-card.status-suspended .photo-frame {
+                filter: grayscale(100%) !important;
+            }
+
+                /* TEAM LOVE COLOR */
+            .TeamLove .member-photo {
+                border-color: rgb(226, 7, 133);
+            }
+
+            .TeamLove .member-name {
+                color: rgb(226, 7, 133);
+            }
+
+            .TeamLove .member-gen {
+                background: rgb(226, 7, 133);
+            }
+
+            .member-card.TeamLove {
+                background: rgb(255, 235, 245);
+                border-color: rgb(226, 7, 133);
+            }
+
+            .TeamLove .profile-btn {
+                background: rgb(226, 7, 133);
+            }
+
+            .TeamLove .profile-btn:hover {
+                background: rgb(180, 0, 100);
+            }
+
+                /* TEAM DREAM COLOR */
+            .TeamDream .member-photo {
+                border-color: rgb(0, 164, 165);
+            }
+
+            .TeamDream .member-name {
+                color: rgb(0, 164, 165);
+            }
+
+            .TeamDream .member-gen {
+                background: rgb(0, 164, 165);
+            }
+
+            .member-card.TeamDream {
+                background: rgb(225, 255, 255);
+                border-color: rgb(0, 164, 165);
+            }
+
+            .TeamDream .profile-btn {
+                background: rgb(0, 164, 165);
+            }
+
+            .TeamDream .profile-btn:hover {
+                background: rgb(0, 164, 165);
+            }
+
+            /* TEAM PASSION COLOR */
+            .TeamPassion .member-photo {
+                border-color: rgb(246, 146, 32);
+            }
+
+            .TeamPassion .member-name {
+                color: rgb(246, 146, 32);
+            }
+
+            .TeamPassion .member-gen {
+                background: rgb(246, 146, 32);
+            }
+
+            .member-card.TeamPassion {
+                background: rgb(255, 245, 235);
+                border-color: rgb(246, 146, 32);
+            }
+
+            .TeamPassion .profile-btn {
+                background: rgb(246, 146, 32);
+            }
+
+            .TeamPassion .profile-btn:hover {
+                background: rgb(246, 146, 32);
+            }
+
+            /* ================= TRAINEE GEN 13 ================= */
+            .member-card.Trainee.gen13 {
+                background: rgb(255, 250, 196);
+                border-color: rgb(196, 120, 120);
+            }
+
+            .Trainee.gen13 .member-name {
+                color: rgb(196, 120, 120);
+            }
+
+            .Trainee.gen13 .member-gen {
+                background: rgb(196, 120, 120);
+            }
+
+            .Trainee.gen13 .profile-btn {
+                background: rgb(196, 120, 120);
+            }
+
+            /* ================= TRAINEE GEN 14 ================= */
+            .member-card.Trainee.gen14 {
+                background: rgb(228, 214, 255);
+                border-color: rgb(196, 120, 120);
+            }
+            
+            .Trainee.gen14 .member-name {
+                color: rgb(196, 120, 120);
+            }    
+
+            .Trainee.gen14 .member-gen {
+                background: rgb(196, 120, 120);
+            }
+
+            .Trainee.gen14 .profile-btn {
+                background: rgb(196, 120, 120);
+            }
+
+            /* VIRTUAL COLOR */
+            .Virtual .member-photo {
+                border-color: rgb(3, 70, 192);
+            }
+
+            .Virtual .member-name {
+                color: rgb(3, 70, 192);
+            }
+
+            .Virtual .member-gen {
+                background: rgb(3, 70, 192);
+            }
+
+            .member-card.Virtual {
+                background: rgb(225, 225, 255);
+                border-color: rgb(3, 70, 192);
+            }
+
+            .Virtual .profile-btn {
+                background: rgb(3, 70, 192);
+            }
+
+            .Virtual .profile-btn:hover {
+                background: rgb(3, 70, 192);
+            }
+            
+            body.bg-semua {
+                background-image: url("Background.png");
+            }
+
+            body.bg-love {
+                background-image: url("Love.png");
+            }
+
+            body.bg-dream {
+                background-image: url("Dream.png");
+            }
+
+            body.bg-passion {
+                background-image: url("Passion.png");
+            }
+
+            body.bg-trainee {
+                background-image: url("Trainee.png");
+            }
+
+            body.bg-virtual {
+                background-image: url("Virtual.png");
+            }
+
+            .TeamLove .photo-frame {
+                background: url("FrameLove.jpg") no-repeat center;
+                background-size: contain;
+            }
+
+            .TeamPassion .photo-frame {
+                background: url("FramePassion.jpg") no-repeat center;
+                background-size: contain;
+            }
+
+            .Trainee .photo-frame {
+                background: url("FramePutih.jpg") no-repeat center;
+                background-size: contain;
+            }
+
+            .Virtual .photo-frame {
+                background: url("FrameVirtual.jpg") no-repeat center;
+                background-size: contain;
+            }
+
+            /* ================= MODE SEMUA MEMBER ================= */
+
+            /* MEMBER INTI (Love, Dream, Passion) jadi merah */
+            body.mode-semua .member-card.TeamLove,
+            body.mode-semua .member-card.TeamDream,
+            body.mode-semua .member-card.TeamPassion,
+            body.mode-semua .member-card.Virtual {
+                border-color: #e20514;
+            }
+
+            body.mode-semua .TeamLove .member-name,
+            body.mode-semua .TeamDream .member-name,
+            body.mode-semua .TeamPassion .member-name,
+            body.mode-semua .Virtual .member-name {
+                color: #e20514;
+            }
+
+            body.mode-semua .TeamLove .profile-btn,
+            body.mode-semua .TeamDream .profile-btn,
+            body.mode-semua .TeamPassion .profile-btn,
+            body.mode-semua .Virtual .profile-btn {
+                background: #e20514;
+            }
+
+
+            /* TRAINEE jadi warna coklat muda */
+            body.mode-semua .member-card.Trainee {
+                border-color: rgb(196, 120, 120);
+            }
+
+            body.mode-semua .Trainee .member-name {
+                color: rgb(196, 120, 120);
+            }
+
+            body.mode-semua .Trainee .member-gen {
+                background: rgb(196, 120, 120);
+            }
+
+            body.mode-semua .Trainee .profile-btn {
+                background: rgb(196, 120, 120);
+            }
+            
+            @font-face {
+                font-family: 'Insanibu';
+                src: url('font/Insanibu.ttf') format('truetype');
+            }
+
+            @font-face {
+                font-family: 'Insanibc';
+                src: url('font/Insanibc.ttf') format('truetype');
+            }
+
+            .Kapten-badge {
+                position: absolute;
+                bottom: 17px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 125px;
+                background: #e20514;
+                color: #ffffff;
+                padding: 5px 0; 
+                font-size: 12px;
+                letter-spacing: 3px;
+                text-align: center;
+                font-family: 'Insanibc', sans-serif;
+            }
+
+        </style>
+
+        <script>
+
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            
+            const grid = document.getElementById("memberGrid");
+            const members = [
+
+                // ================= TEAM LOVE (15) =================
+                { name: "Alya Amanda", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Alya.jpeg" },
+                { name: "Anindya Ramadhani", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Anindya.jpeg" },
+                { name: "Aurellia", gen: "Gen 10", team: "TeamLove", photo: "TeamLove/Lia.jpeg" },
+                { name: "Aurhel Alana", gen: "Gen 12", team: "TeamLove", photo: "TeamLove/Lana.jpeg" },
+                { name: "Cathleen Nixie", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Cathy.jpeg", status: "Graduation" },
+                { name: "Celline Thefani", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Elin.jpeg" },
+                { name: "Cynthia Yaputera", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Cynthia.jpeg" },
+                { name: "Fiony Alveria", gen: "Gen 7", team: "TeamLove", photo: "TeamLove/Fiony.jpeg" },
+                { name: "Fritzy Rosmerian", gen: "Gen 12", team: "TeamLove", photo: "TeamLove/Fritzy.jpeg" },
+                { name: "Grace Octaviani", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Gracie.jpeg" },
+                { name: "Hillary Abigail", gen: "Gen 12", team: "TeamLove", photo: "TeamLove/Lily.jpeg" },
+                { name: "Indah Cahya", gen: "Gen 9", team: "TeamLove", photo: "TeamLove/Indah.jpeg" },
+                { name: "Jazzlyn Trisha", gen: "Gen 12", team: "TeamLove", photo: "TeamLove/Trisha.jpeg" },
+                { name: "Michelle Alexandra", gen: "Gen 11", team: "TeamLove", photo: "TeamLove/Miche.jpeg" },
+                { name: "Nayla Suji", gen: "Gen 12", team: "TeamLove", photo: "TeamLove/Nayla.jpeg" },
+
+                // ================= TEAM DREAM (14) =================
+                { name: "Freya Jayawardana", gen: "Gen 7", team: "TeamDream", photo: "TeamDream/Freya.jpg" },
+                { name: "Adeline Wijaya", gen: "Gen 12", team: "TeamDream", photo: "TeamDream/Delynn.jpg" },
+                { name: "Chelsea Davina", gen: "Gen 11", team: "TeamDream", photo: "TeamDream/Chelsea.jpg", status: "Graduation" },
+                { name: "Febriola Sinambela", gen: "Gen 7", team: "TeamDream", photo: "TeamDream/Olla.jpg" },
+                { name: "Gabriela Abigail", gen: "Gen 10", team: "TeamDream", photo: "TeamDream/Ella.jpg" },    
+                { name: "Gendis Mayrannisa", gen: "Gen 11", team: "TeamDream", photo: "TeamDream/Gendis.jpg", status: "Suspended" },
+                { name: "Gita Sekar Andarini", gen: "Gen 6", team: "TeamDream", photo: "TeamDream/Gita.jpg" },
+                { name: "Greesella Adhalia", gen: "Gen 11", team: "TeamDream", photo: "TeamDream/Greesel.jpg" },
+                { name: "Helisma Putri", gen: "Gen 7", team: "TeamDream", photo: "TeamDream/Eli.jpg" },
+                { name: "Jesslyn Elly", gen: "Gen 10", team: "TeamDream", photo: "TeamDream/Lyn.jpg" },
+                { name: "Marsha Lenathea", gen: "Gen 9", team: "TeamDream", photo: "TeamDream/Marsha.jpg" },
+                { name: "Nina Tutachia", gen: "Gen 12", team: "TeamDream", photo: "TeamDream/Nachia.jpg" },
+                { name: "Oline Manuel", gen: "Gen 12", team: "TeamDream", photo: "TeamDream/Oline.jpg" },
+                { name: "Shabilqis Naila", gen: "Gen 12", team: "TeamDream", photo: "TeamDream/Nala.jpg" },
+
+                // ================= TEAM PASSION (15) =================
+                { name: "Abigail Rachel", gen: "Gen 12", team: "TeamPassion", photo: "TeamPassion/Aralie.jpeg" },
+                { name: "Angelina Christy", gen: "Gen 7", team: "TeamPassion", photo: "TeamPassion/Christy.jpeg" },
+                { name: "Catherina Vallencia", gen: "Gen 12", team: "TeamPassion", photo: "TeamPassion/Erine.jpeg" },
+                { name: "Cornelia Vanisa", gen: "Gen 8", team: "TeamPassion", photo: "TeamPassion/Oniel.jpeg" },
+                { name: "Dena Natalia", gen: "Gen 11", team: "TeamPassion", photo: "TeamPassion/Danella.jpeg" },
+                { name: "Desy Natalia", gen: "Gen 11", team: "TeamPassion", photo: "TeamPassion/Daisy.jpeg" },
+                { name: "Feni Fitriyanti", gen: "Gen 3", team: "TeamPassion", photo: "TeamPassion/Feni.jpeg", status: "Hiatus" },
+                { name: "Jessica Chandra", gen: "Gen 7", team: "TeamPassion", photo: "TeamPassion/Jessi.jpeg" },
+                { name: "Kathrina Irene", gen: "Gen 9", team: "TeamPassion", photo: "TeamPassion/Kathrina.jpeg" },
+                { name: "Lulu Salsabila", gen: "Gen 8", team: "TeamPassion", photo: "TeamPassion/Lulu.jpeg" },
+                { name: "Michelle Levia", gen: "Gen 12", team: "TeamPassion", photo: "TeamPassion/Levi.jpeg" },
+                { name: "Mutiara Azzahra", gen: "Gen 7", team: "TeamPassion", photo: "TeamPassion/Muthe.jpeg" },
+                { name: "Raisha Syifa", gen: "Gen 10", team: "TeamPassion", photo: "TeamPassion/Raisha.jpeg" },
+                { name: "Ribka Budiman", gen: "Gen 12", team: "TeamPassion", photo: "TeamPassion/Ribka.jpeg" },
+                { name: "Victoria Kimberly", gen: "Gen 12", team: "TeamPassion", photo: "TeamPassion/Kimmy.jpeg" },
+
+                // ================= Trainee (19) =================
+                { name: "Afera Thalia", gen: "Gen 14", team: "Trainee", photo: "Trainee/Fera.jpeg" },
+                { name: "Astrella Virgiananda", gen: "Gen 13", team: "Trainee", photo: "Trainee/Virgi.jpeg" },
+                { name: "Aulia Riza", gen: "Gen 13", team: "Trainee", photo: "Trainee/Auwia.jpeg" },
+                { name: "Bong Aprilli", gen: "Gen 13", team: "Trainee", photo: "Trainee/Rilly.jpeg" },
+                { name: "Carissa Dini", gen: "Gen 14", team: "Trainee", photo: "Trainee/Carissa.jpeg" },
+                { name: "Christabella Bonita", gen: "Gen 14", team: "Trainee", photo: "Trainee/Bella.jpeg" },
+                { name: "Fahira Putri", gen: "Gen 14", team: "Trainee", photo: "Trainee/Fahira.jpeg" },
+                { name: "Fatimah Azzahra", gen: "Gen 14", team: "Trainee", photo: "Trainee/Rara.jpeg" },
+                { name: "Hagia Sopia", gen: "Gen 13", team: "Trainee", photo: "Trainee/Giaa.jpeg" },
+                { name: "Heidi Suyangga", gen: "Gen 14", team: "Trainee", photo: "Trainee/Heidi.jpeg" },
+                { name: "Humaira Ramadhani", gen: "Gen 13", team: "Trainee", photo: "Trainee/Maira.jpeg" },
+                { name: "Jacqueline Immanuela", gen: "Gen 13", team: "Trainee", photo: "Trainee/Ekin.jpeg" },
+                { name: "Jemima Evodie", gen: "Gen 13", team: "Trainee", photo: "Trainee/Jemima.jpeg" },
+                { name: "Maxine Faye", gen: "Gen 14", team: "Trainee", photo: "Trainee/Maxine.jpeg" },
+                { name: "Mikaela Kusjanto", gen: "Gen 13", team: "Trainee", photo: "Trainee/Mikaela.jpeg" },
+                { name: "Nur Intan", gen: "Gen 13", team: "Trainee", photo: "Trainee/Intan.jpeg" },    
+                { name: "Putry Jazyta", gen: "Gen 14", team: "Trainee", photo: "Trainee/Jazzy.jpeg" },
+                { name: "Ralyne Van Irwan", gen: "Gen 14", team: "Trainee", photo: "Trainee/Ralyne.jpeg" },
+                { name: "Sona Kalyana", gen: "Gen 14", team: "Trainee", photo: "Trainee/Sona.jpeg" },
+
+                        // ================= Virtual (5) =================
+                { name: "Isha Kirana", gen: "Gen 2", team: "Virtual", photo: "Virtual/Isha.png" },
+                { name: "Maura Nilambari", gen: "Gen 2", team: "Virtual", photo: "Virtual/Maura.png" },
+                { name: "Pia Meraleo", gen: "Gen 1", team: "Virtual", photo: "Virtual/Pia.jpeg" },
+                { name: "Sami Maono", gen: "Gen 2", team: "Virtual", photo: "Virtual/Sami.png", status: "Hiatus" },
+                { name: "Tana Nona", gen: "Gen 1", team: "Virtual", photo: "Virtual/Tana.jpeg" },
+
+            ];
+            
+            function updateSummary() {
+
+                const totalSemua = members.length;
+
+                const totalInti = members.filter(m =>
+                    m.team === "TeamLove" ||
+                    m.team === "TeamDream" ||
+                    m.team === "TeamPassion"
+                ).length;
+
+                const totalTrainee = members.filter(m => m.team === "Trainee").length;
+
+                const totalVirtual = members.filter(m => m.team === "Virtual").length;
+
+                document.getElementById("summaryMember").innerHTML = `
+                    Semua Member : <span style="color:#00c103">${totalSemua}</span> &nbsp; | &nbsp;
+                    Member Inti : <span style="color:#e20514">${totalInti}</span> &nbsp; | &nbsp;
+                    Trainee : <span style="color:rgb(196, 120, 120)">${totalTrainee}</span> &nbsp; | &nbsp;
+                    Member Virtual : <span style="color:rgb(3, 70, 192)">${totalVirtual}</span>
+                `;
+            }
+
+            function renderMembers(filter = "SemuaMember") {
+                grid.innerHTML = "";
+
+                if (filter === "SemuaMember") {
+
+                    // ================= NON TRAINEE =================
+                    let nonTrainee = members.filter(m => m.team !== "Trainee");
+
+                    // urutkan abjad
+                    nonTrainee.sort((a, b) => a.name.localeCompare(b.name));
+
+                    // 🔥 paksa Freya ke paling atas
+                    const freyaIndex = nonTrainee.findIndex(m => m.name === "Freya Jayawardana");
+                    if (freyaIndex > -1) {
+                        const freya = nonTrainee.splice(freyaIndex, 1)[0];
+                        nonTrainee.unshift(freya);
+                    }
+
+                    // render non trainee
+                    renderSection(nonTrainee);
+
+                    // ================= TRAINEE (SECTION BARU) =================
+                    const trainee = members.filter(m => m.team === "Trainee");
+
+                    // judul trainee
+                    const title = document.createElement("div");
+                    grid.appendChild(title);
+
+                    renderSection(trainee);
+
+                } else {
+                    const list = members.filter(m => m.team === filter);
+                    renderSection(list);
+                }
+            }
+
+            function renderSection(list) {
+                let count = 0;
+
+                list.forEach(member => {
+
+                    const card = document.createElement("div");
+                    let genClass = "";
+
+                    if (member.team === "Trainee") {
+                        if (member.gen.includes("13")) genClass = "gen13";
+                        if (member.gen.includes("14")) genClass = "gen14";
+                    }
+
+                    let statusClass = "";
+
+                    if (member.status === "Hiatus") statusClass = "status-hiatus";
+                    else if (member.status === "Suspended") statusClass = "status-suspended";
+                    else if (member.status === "Graduation") statusClass = "status-graduation";
+
+                    card.className = `member-card ${member.team} ${genClass} ${statusClass}`;
+
+                    let isAnnounced = 
+                        member.name === "Cathleen Nixie" || 
+                        member.name === "Chelsea Davina";
+
+                    let isHiatus =     
+                        member.name === "Feni Fitriyanti" ||
+                        member.name === "Sami Maono";
+
+                    let isSuspended =     
+                        member.name === "Gendis Mayrannisa";
+
+                    let isKaptenJKT48 =
+                        member.name === "Freya Jayawardana"
+
+                    card.innerHTML = `    
+
+                        ${isAnnounced ? `<div class="card-badge">🎓</div>` : ""}
+                        ${isHiatus ? `<div class="card-badge">⏸️</div>` : ""}
+                        ${isSuspended ? `<div class="card-badge">🚫</div>` : ""}
+                        ${isKaptenJKT48 ? `<div class="card-badge">🏅</div>`:""}
+
+                        <div class="photo-frame">
+                            <img class="member-photo" src="${member.photo}" alt="${member.name}">
+                            
+                            ${isAnnounced ? `<div class="announced-badge">GRADUATION ANNOUNCEMENT</div>` : ""}
+                            ${isHiatus ? `<div class="announced-badge">HIATUS</div>` : ""}
+                            ${isSuspended ? `<div class="announced-badge">SUSPENDED</div>` : ""}
+
+                            ${isKaptenJKT48 ? `<div class="Kapten-badge">KAPTEN JKT48</div>` : ""}  
+                        </div>
+
+                        <div class="member-name">${member.name}</div>
+                        <div class="member-gen">${member.gen}</div>
+                    `;
+                    card.onclick = () => {
+
+                        const team = member.team;
+
+                        localStorage.setItem("selected_team", team);
+
+                        const nama = encodeURIComponent(member.name);
+
+                        openProfile(nama, card);
+                    };
+
+                    card.style.animationDelay = `${count * 0.05}s`;
+
+                    grid.appendChild(card);
+
+                    setTimeout(() => {
+                        card.classList.add("show");
+                    }, 10);
+
+                    count++;
+                });
+            }
+
+            function openProfile(nama, card) {
+            const transition = document.getElementById("pageTransition");
+
+                card.style.transition = "all 0.4s ease";
+                card.style.transform = "scale(1.2)";
+                card.style.zIndex = "999";
+
+                transition.style.opacity = "1";
+
+                setTimeout(() => {
+                    window.location.href = `ProfileMember.html?name=${nama}`;
+                }, 400);
+            }
+            
+            renderMembers();
+            updateSummary();
+            updateStatusSummary();
+            
+            function updateStatusSummary() {
+                const hiatus = members.filter(m => m.status === "Hiatus").length;
+                const suspended = members.filter(m => m.status === "Suspended").length;
+
+                // GRADUATION tetap dihitung sebagai AKTIF
+                const active = members.length - hiatus - suspended;
+
+                const graduation = members.filter(m => m.status === "Graduation").length;
+
+                document.getElementById("summaryStatus").innerHTML = `
+                    Aktif : <span style="color:#00c103">${active}</span> &nbsp; | &nbsp;
+                    Hiatus : <span style="color:#ff9800">${hiatus}</span> &nbsp; | &nbsp;
+                    Suspended : <span style="color:#000000">${suspended}</span> &nbsp; | &nbsp;
+                    Graduation Announcement : <span style="color:#ff348c;">${graduation}</span>
+                `;
+            }
+            
+            const filters = document.querySelectorAll(".filter");
+
+            const audio = document.getElementById("bgMusic");
+            audio.volume = 0.05; // 0.0 - 1.0
+
+            const musicMap = {
+            "SemuaMember": [
+                "Musik/SemuaMember.mp3",
+            ],
+            "TeamLove": [
+                "Musik/TeamLove.mp3",
+            ],
+            "TeamDream": [
+                "Musik/TeamDream.mp3",
+            ],
+            "TeamPassion": [
+                "Musik/TeamPassion.mp3",
+            ],
+            "Trainee": [
+                "Musik/Trainee.mp3",
+            ],
+            "Virtual": [
+                "Musik/Virtual.mp3",
+                "Musik/Virtual2.mp3"
+            ]
+        };
+
+            let currentPlaylist = [];
+            let currentTrack = 0;
+
+            function playMusic(playlist) {
+                currentPlaylist = playlist;
+                currentTrack = 0;
+                playTrack();
+            }
+
+            function playTrack() {
+                if (!currentPlaylist.length) return;
+
+                audio.src = currentPlaylist[currentTrack];
+                audio.play().catch(() => {
+                    console.log("Autoplay diblokir browser");
+                });
+            }
+
+            audio.addEventListener("ended", () => {
+                setTimeout(() => {
+                    currentTrack++;
+                    if (currentTrack >= currentPlaylist.length) {
+                        currentTrack = 0;
+                    }
+                    playTrack();
+                }, 200);
+            });
+            
+            window.addEventListener("DOMContentLoaded", () => {
+
+                window.scrollTo({ top: 0, behavior: "instant" });
+                document.body.classList.add("bg-semua");
+                document.body.classList.add("mode-semua");
+
+                const savedFilter = "SemuaMember";
+                    localStorage.setItem("music_filter", "SemuaMember");
+                const savedMuted = localStorage.getItem("music_muted") === "true";
+
+                if (musicMap[savedFilter]) {
+                    playMusic(musicMap[savedFilter]);
+
+                    audio.volume = 0.05;
+                    audio.muted = savedMuted;
+
+                }
+            });
+            
+            filters.forEach(btn => {
+                btn.addEventListener("click", () => {
+
+                    window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                    });
+
+                    filters.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    
+                    grid.classList.remove("fade-in");
+                    grid.classList.remove("fade-out");
+                    
+                    void grid.offsetWidth;
+                    
+                    grid.classList.add("fade-out");
+
+                    setTimeout(() => {
+                        
+                        renderMembers(btn.dataset.filter);
+
+                        const selected = btn.dataset.filter;
+
+                        if (musicMap[selected]) {
+                        if (JSON.stringify(currentPlaylist) !== JSON.stringify(musicMap[selected])) {
+                            playMusic(musicMap[selected]);
+                        }
+                            audio.volume = 0.1;
+                            audio.muted = isMuted;
+                            localStorage.setItem("music_filter", selected);
+                        }
+                        
+                        document.body.classList.remove(
+                            "bg-semua",
+                            "bg-love",
+                            "bg-dream",
+                            "bg-passion",
+                            "bg-trainee",
+                            "bg-virtual"
+                        );
+
+                        document.body.classList.remove("mode-semua");
+
+                        switch (selected) {
+                            case "TeamLove":
+                                document.body.classList.add("bg-love");
+                                break;
+                            case "TeamDream":
+                                document.body.classList.add("bg-dream");
+                                break;
+                            case "TeamPassion":
+                                document.body.classList.add("bg-passion");
+                                break;
+                            case "Trainee":
+                                document.body.classList.add("bg-trainee");
+                                break;
+                            case "Virtual":
+                                document.body.classList.add("bg-virtual");
+                                break;
+                            default:
+                                document.body.classList.add("bg-semua");
+                                document.body.classList.add("mode-semua");
+                        }
+
+                        grid.classList.remove("fade-out");
+                        void grid.offsetWidth;
+                        
+                        grid.classList.add("fade-in");
+
+                    }, 350);
+                });
+            });
+
+            const pageMap = {
+                "Home.html": "home",
+                "News.html": "news",
+                "Schedule.html": "schedule",
+                "Songs.html": "songs",
+                "Theater.html": "theater",
+                "MemberJKT48.html": "member",
+                "Sister.html": "sister"
+            };
+
+            const currentPage = window.location.pathname.split("/").pop();
+
+            const activePage = pageMap[currentPage];
+
+            if (activePage) {
+                document.querySelectorAll(".header-btn").forEach(btn => {
+                    if (btn.dataset.page === activePage) {
+                        btn.classList.add("active");
+                    }
+                });
+            }
+
+            function openWithDelay() {
+            setTimeout(() => {
+                window.open("https://rh26.jkt48.com");
+            }, 800);
+            }
+            
+            let isMuted = false;
+                const muteBtn = document.getElementById("muteBtn");
+
+            function toggleMute() {
+                isMuted = !isMuted;
+
+                audio.muted = isMuted;
+                localStorage.setItem("music_muted", isMuted);
+
+                muteBtn.textContent = isMuted ? "🔇" : "🔊";
+            }
+
+            let hasInteracted = false;
+
+            document.addEventListener("click", () => {
+                if (!hasInteracted) {
+                    hasInteracted = true;
+
+                    if (musicMap["SemuaMember"]) {
+                        currentPlaylist = musicMap["SemuaMember"];
+                        currentTrack = 0;
+
+                        audio.src = currentPlaylist[0];
+                        audio.play().catch(()=>{});
+                    }
+                }
+            });
+
+            function goBackMenu() {
+            const transition = document.getElementById("pageTransition");
+
+                transition.style.opacity = "1";
+
+                localStorage.setItem("openMenu", "true");
+
+                setTimeout(() => {
+                    window.location.href = "Menu.html";
+                }, 400);
+            }
+
+        </script>
+        </body>
+        </html>

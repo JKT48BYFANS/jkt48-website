@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Member</title>
+
+    <style>
+
+        @font-face {
+            font-family: 'Insanibu';
+            src: url('Fonts/Insanibu.ttf');
+        }
+
+        @font-face {
+            font-family: 'Insanibc';
+            src: url('Fonts/Insanibc.ttf');
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Insanibu', sans-serif;
+            background: #f5f5f5;
+            display: block;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .content {
+            margin-top: 85px;
+        }
+
+        .page {
+            margin-top: 110px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #e20785 15%, #f69220 50%, #e20514);
+            padding: 20px 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            gap: 10px;
+        }
+
+        .header-content {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-size: 40px;
+        }
+
+        .header-left {
+            position: absolute;
+            left: 15px;
+        }
+
+        .header-right {
+            position: absolute;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            padding: 6px 12px;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #e20514;
+            border: 2px solid #e20514;
+            border-radius: 8px;
+            cursor: pointer;    
+            font-family: 'Insanibc', sans-serif;
+        }
+
+        .header-btn:hover {
+            background-color: #e20514;
+            color: white;
+        }
+
+        .header-btn.active {
+            background-color: #e20514;
+            color: white;
+            border: 3px solid white;
+            transform: scale(1.05);
+        }
+
+        /* ================= CENTER CONTENT ================= */
+        .page {
+            margin-top: 100px;
+        }
+
+        /* ================= CARD ================= */
+        .member-card {
+            width: 200px;
+            min-height: 240px;
+            border-radius: 12px;
+            padding: 20px 14px;
+            text-align: center;
+            border: 3px solid #e20514;
+            box-shadow: 0 6px 12px rgba(0,0,0,1);
+            background: #ffffff;
+        }
+
+        .group-name {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+            animation-delay: 0.4s;
+            font-size: 18px !important;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .member-title {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+            animation-delay: 0.5s;
+            white-space: nowrap;
+        }
+
+        .member-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            box-shadow: 0 6px 15px rgba(0,0,0,1);
+            transform: scale(1.08);
+        }
+
+        .mini-photo {
+            width: 100%;
+            aspect-ratio: 1 / 1; 
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 2.5px solid #e20514;
+            box-sizing: border-box;
+        }
+
+        .mini-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-size: 15px;
+            margin-top: 20px;
+            color: #e20514;
+            letter-spacing: 2.5px;
+        }
+
+        .member-gen {
+            background: #e20514;
+            color: white;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .back-btn {
+            margin-top: 15px;
+            padding: 8px 12px;
+            border: none;
+            background: #e20514;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #b8000f;
+        }
+
+        body.bg-love {
+            background-image: url("Love.jpg");
+        }
+
+        body.bg-dream {
+            background-image: url("Dream.jpg");
+        }
+
+        body.bg-passion {
+            background-image: url("Passion.jpg");
+        }
+
+        body.bg-trainee {
+            background-image: url("Trainee.jpg");
+        }
+
+        body.bg-virtual {
+            background-image: url("Virtual.jpg");
+        }
+
+        body {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* ================= TEAM LOVE ================= */
+        .member-card.TeamLove {
+            background: rgb(255, 235, 245);
+            border-color: rgb(226, 7, 133);
+        }
+
+        .TeamLove .member-name {
+            color: rgb(226, 7, 133);
+        }
+
+        .TeamLove .member-gen {
+            background: rgb(226, 7, 133);
+        }
+
+        .TeamLove .profile-btn {
+            background: rgb(226, 7, 133);
+        }
+
+        /* ================= TEAM DREAM ================= */
+        .member-card.TeamDream {
+            background: rgb(225, 255, 255);
+            border-color: rgb(0, 164, 165);
+        }
+
+        .TeamDream .member-name {
+            color: rgb(0, 164, 165);
+        }
+
+        .TeamDream .member-gen {
+            background: rgb(0, 164, 165);
+        }
+
+        /* ================= TEAM PASSION ================= */
+        .member-card.TeamPassion {
+            background: rgb(255, 245, 235);
+            border-color: rgb(246, 146, 32);
+        }
+
+        .TeamPassion .member-name {
+            color: rgb(246, 146, 32);
+        }
+
+        .TeamPassion .member-gen {
+            background: rgb(246, 146, 32);
+        }
+
+        /* ================= TRAINEE ================= */
+        .member-card.Trainee {
+            background: rgb(255, 250, 196);
+            border-color: rgb(196, 120, 120);
+        }
+
+        .Trainee .member-name {
+            color: rgb(196, 120, 120);
+        }
+
+        .Trainee .member-gen {
+            background: rgb(196, 120, 120);
+        }
+
+        /* ================= VIRTUAL ================= */
+        .member-card.Virtual {
+            background: rgb(225, 225, 255);
+            border-color: rgb(3, 70, 192);
+        }
+
+        .Virtual .member-name {
+            color: rgb(3, 70, 192);
+        }
+
+        .Virtual .member-gen {
+            background: rgb(3, 70, 192);
+        }
+
+        #pageTransition {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .profile-container {
+            background: rgba(255,255,255);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,1);
+            max-width: 900px;
+            width: 95%;
+            opacity: 0;
+            animation: fadeSlideUp 0.6s ease forwards;
+            will-change: transform, opacity;
+            margin: 0 auto; 
+        }
+
+        .profile-container:nth-of-type(1) {
+            animation-delay: 0.1s;
+        }
+
+        .profile-container:nth-of-type(2) {
+            animation-delay: 0.3s;
+        }
+
+        .profile-layout {
+            margin: 0 auto;
+            max-width: 850px;
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* BOX FOTO */
+        .box-photo {
+            width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 0;
+        }
+
+        /* BOX INFO */
+        .box-info {
+            width: 100%;
+            max-width: 760px;
+            margin-left: 0;
+        }
+
+        .info-box {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+        }
+
+        .profile-info .info-box {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+        }
+
+        .profile-info .info-box.full {
+            animation-delay: 0.4s;
+        }
+
+        .profile-info .info-box:nth-of-type(2) { animation-delay: 0.5s; } /* lahir */
+        .profile-info .info-box:nth-of-type(3) { animation-delay: 0.55s; } /* status */
+        .profile-info .info-box:nth-of-type(4) { animation-delay: 0.6s; } /* tinggi */
+        .profile-info .info-box:nth-of-type(5) { animation-delay: 0.65s; } /* darah */
+        .profile-info .info-box:nth-of-type(6) { animation-delay: 0.7s; } /* zodiac */
+        .profile-info .info-box:nth-of-type(7) { animation-delay: 0.75s; } /* fanbase */
+
+        .double-row {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+            animation-delay: 0.85s;
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .member-gen-text {
+            animation-delay: 0.3s;
+        }
+
+        /* ===== LEFT FOTO ===== */
+        .profile-left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ===== RIGHT INFO ===== */
+        .profile-right {
+            width: 100%;
+            max-width: 750px;
+        }   
+
+        .profile-header .member-title {
+            font-size: 36px;
+            background: linear-gradient(
+                90deg,
+                #e20785 25%,
+                #e20514 50%,
+                #f69220 75%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-align: center;
+            white-space: normal;
+            animation-delay: 0.2s;
+        }
+
+        /* INFO BOX */
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 16px;
+            color: rgb(0, 0, 0);
+            white-space: nowrap; 
+        }
+
+        .debut-social {
+            grid-column: span 2;
+        }
+
+        .info-box {
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,1);
+            text-align: center;
+        }
+        
+        .info-box span {
+            font-size: 18px;
+            display: block;
+            margin-top: 4px;
+            white-space: normal;       
+            overflow: visible;           
+            text-overflow: unset;    
+            line-height: 1.6; 
+        }
+
+        .section-title {
+            display: inline-block;
+            padding: 8px 14px;
+            color: white;
+            border-radius: 10px;
+            border: 3px solid transparent;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,1);
+        }
+        
+        .TeamLove  .section-title {
+            background: linear-gradient(90deg, #e20785, #ff43e0);
+            border-color: #8400ff;
+        }
+
+        .TeamDream  .section-title {
+            background: linear-gradient(90deg, #00a4a5, #4da6ff);
+            border-color: #0004ff;
+        }
+
+        .TeamPassion .section-title {
+            background: linear-gradient(90deg, #f69220, #ffa600);
+            border-color: #ff5e00;
+        }
+
+        .Trainee .section-title {
+            background: linear-gradient(90deg, #c47878, #ff5252);
+            border-color: #743f3f;
+        }
+
+        .Virtual .section-title {
+            background: linear-gradient(90deg, #0346c0, #3503c0);
+            border-color: #002873;
+        }
+
+        /* BUTTON */
+        .fan-btn {
+            margin-top: 20px;
+            background: linear-gradient(90deg, pink, hotpink);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .info-box.full {
+            grid-column: span 3;
+        }
+
+        .inline-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .double-row {
+            grid-column: span 3; 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .name-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 350px;
+            position: relative;
+            left: 15px;
+            top: -25px;
+        }
+
+        .name-vertical span {
+            font-size: 62px;
+            letter-spacing: 2px;
+        }
+
+        .name-vertical::before,
+        .name-vertical::after {
+            content: "";
+            width: 6px;
+            height: 100%;
+            margin: 2px 0;
+            display: none;
+        }
+
+        /* TEAM LOVE */
+        .TeamLove .member-nickname {
+            color: rgb(226, 7, 133);
+            text-shadow: 
+                1px 1px 0 rgb(255, 255, 255),
+                -1px -1px 0 rgb(255, 255, 255),
+                1px -1px 0 rgb(255, 255, 255),
+                -1px 1px 0 rgb(255, 254, 255);
+        }
+
+        /* TEAM DREAM */
+        .TeamDream .member-nickname {
+            color: rgb(0, 164, 165);
+            text-shadow: 
+                1px 1px 0 rgb(255, 255, 255),
+                -1px -1px 0 rgb(255, 255, 255),
+                1px -1px 0 rgb(255, 255, 255),
+                -1px 1px 0 rgb(255, 255, 255);
+        }
+
+        /* TEAM PASSION */
+        .TeamPassion .member-nickname {
+            color: rgb(246, 146, 32);
+            text-shadow: 
+                1px 1px 0 rgb(255, 255, 255),
+                -1px -1px 0 rgb(255, 255, 255),
+                1px -1px 0 rgb(255, 255, 255),
+                -1px 1px 0 rgb(255, 255, 255);
+        }
+
+        /* TRAINEE */
+        .Trainee .member-nickname {
+            color: rgb(196, 120, 120);
+            text-shadow: 
+                1px 1px 0 rgb(255, 255, 255),
+                -1px -1px 0 rgb(255, 255, 255),
+                1px -1px 0 rgb(255, 255, 255),
+                -1px 1px 0 rgb(255, 255, 255);
+        }
+
+        /* VIRTUAL */
+        .Virtual .member-nickname {
+            color: rgb(3, 70, 192);
+            text-shadow: 
+                1px 1px 0 rgb(255, 255, 255),
+                -1px -1px 0 rgb(255, 255, 255),
+                1px -1px 0 rgb(255, 255, 255),
+                -1px 1px 0 rgb(255, 255, 255);
+        }
+
+        /* ================= PROFILE CONTAINER IKUT TEAM ================= */
+
+        /* TEAM LOVE */
+        .profile-container.TeamLove {
+            background: rgb(255, 235, 245);
+            border: 3px solid rgb(226, 7, 133);
+        }
+
+        /* TEAM DREAM */
+        .profile-container.TeamDream {
+            background: rgb(225, 255, 255);
+            border: 3px solid rgb(0, 164, 165);
+        }
+
+        /* TEAM PASSION */
+        .profile-container.TeamPassion {
+            background: rgb(255, 245, 235);
+            border: 3px solid rgb(246, 146, 32);
+        }
+
+        /* TRAINEE */
+        .profile-container.Trainee {
+            background: rgb(255, 250, 196);
+            border: 3px solid rgb(196, 120, 120);
+        }
+
+        /* VIRTUAL */
+        .profile-container.Virtual {
+            background: rgb(225, 225, 255);
+            border: 3px solid rgb(3, 70, 192);
+        }
+
+        /* ================= INFO BOX IKUT WARNA CARD ================= */
+
+        /* TEAM LOVE */
+        .profile-container.TeamLove .info-box {
+            background: rgb(255, 235, 245);
+            border: 2px solid rgb(226, 7, 133);
+        }
+
+        /* TEAM DREAM */
+        .profile-container.TeamDream .info-box {
+            background: rgb(225, 255, 255);
+            border: 2px solid rgb(0, 164, 165);
+        }
+
+        /* TEAM PASSION */
+        .profile-container.TeamPassion .info-box {
+            background: rgb(255, 245, 235);
+            border: 2px solid rgb(246, 146, 32);
+        }
+
+        /* TRAINEE */
+        .profile-container.Trainee .info-box {
+            background: rgb(255, 250, 196);
+            border: 2px solid rgb(196, 120, 120);
+        }
+
+        /* VIRTUAL */
+        .profile-container.Virtual .info-box {
+            background: rgb(225, 225, 255);
+            border: 2px solid rgb(3, 70, 192);
+        }
+
+        .member-gen-text {
+            font-size: 15px;
+            color: #000000;
+            margin-top: -20px;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeSlideUp 0.5s ease forwards;
+            animation-delay: 0.5s;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .status-aktif {
+            color: #00c103;
+        }
+
+        .status-hiatus {
+            color: #ff9800;
+        }
+
+        .status-suspended {
+            color: #000000;
+        }
+
+        .status-grad {
+            color: #ff348c;
+        }
+
+        .member-nickname {
+            font-size: 20px; 
+            margin-left: 10px;
+            font-family: 'Insanibu', sans-serif;
+            letter-spacing: 3px;
+        }
+
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes slideFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-80px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+                
+        #muteBtn {
+            font-size: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        #muteBtn:hover {
+            transform: scale(1.2);
+        }
+
+        .inner-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .mini-card {
+            width: clamp(110px, 28vw, 140px);
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 14px 10px 10px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,1);
+            transition: transform 0.2s ease;
+            position: relative;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+
+        .mini-card-badges {
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            width: max-content;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .mini-card:hover {
+            transform: scale(1.05);
+        }
+
+        .mini-card p {
+            margin: 0;
+            font-size: 12px;
+            color: rgb(0, 0, 0);
+        }
+
+        .mini-card span {
+            font-size: 11px;
+            line-height: 1.35;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .partisipasi-list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .partisipasi-group {
+            width: 100%;
+            text-align: center;
+            margin-top: 54px;
+        }
+
+        .partisipasi-group:first-child {
+            margin-top: 8px;
+        }
+
+        .partisipasi-group .inner-grid {
+            margin-top: 18px; 
+        }
+
+        .partisipasi-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 999px;
+            color: #ffffff;
+            font-size: 13px;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 8px rgba(0,0,0,1);
+            margin-top: 18px;
+            border: 3px solid #ffffff !important;
+        }
+
+        .center-badge {
+            background: linear-gradient(90deg, #ff5e00, #ffc400);;
+        }
+
+        .undergirls-badge {
+            background: linear-gradient(90deg, #8400ff, #ff43e0);
+        }
+
+        .double-center-badge {
+            background: linear-gradient(90deg, #00b01a, #b1d400);
+        }
+
+        .center-badge,
+        .undergirls-badge,
+        .double-center-badge  {
+            display: inline-block;
+            position: static;
+            transform: none;
+            padding: 4px 9px;
+            border-radius: 999px;
+            color: #ffffff;
+            border: 2.5px solid #ffffff;
+            font-size: 10px;
+            letter-spacing: 1px;
+            line-height: 1;
+            box-shadow: 0 2px 6px rgba(0,0,0,1);
+            white-space: nowrap;
+        }
+
+        .badge-senbatsu {
+            background: linear-gradient(90deg, #ff2ddc, #e20514);
+        }
+
+        .badge-coupling {
+            background: linear-gradient(90deg, #ff43e0, #8400ff);
+        }
+
+        .badge-digital {
+            background: linear-gradient(90deg, #00aaff, #0004ff);
+        }
+
+        .badge-setlist {
+            background: linear-gradient(90deg, #ffc400, #ff5e00);
+        }
+
+        .partisipasi-group .inner-grid {
+            margin-top: 12px;
+        }
+
+        .partisipasi-senbatsu .mini-photo {
+            border-color: #e20514;
+        }
+
+        .partisipasi-coupling .mini-photo {
+            border-color: #8400ff;
+        }
+
+        .partisipasi-digital .mini-photo {
+            border-color: #0004ff;
+        }
+
+        .partisipasi-setlist .mini-photo {
+            border-color: #ff5e00;
+        }
+
+        @media (max-width: 700px) {
+            .profile-container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .photo-frame,
+            .box-photo {
+                width: 210px;
+            }
+
+            .photo-frame {
+                height: 210px;
+            }
+
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+
+            .info-box.full,
+            .double-row,
+            .debut-social {
+                grid-column: span 1;
+            }
+
+            .double-row {
+                grid-template-columns: 1fr;
+            }
+
+            .member-nickname {
+                display: block;
+                margin-left: 0;
+                margin-top: 6px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<div id="pageTransition"></div>
+
+<!-- ================= HEADER ================= -->
+<div class="top-header">
+
+    <button class="header-btn header-left" data-page="home" onclick="goBackMenu()">
+        < KEMBALI
+    </button>
+
+    <button class="header-btn" data-page="news" onclick="alert('Belum tersedia')">
+        NEWS
+    </button>
+
+    <button class="header-btn" data-page="schedule" onclick="alert('Belum tersedia')">
+        SCHEDULE
+    </button>
+
+    <button class="header-btn" data-page="theater" onclick="alert('Belum tersedia')">
+        THEATER
+    </button>
+
+    <button class="header-btn" onclick="navigateWithTransition('members.html')">
+        MEMBER
+    </button>
+
+    <button class="header-btn" data-page="sister" onclick="alert('Belum tersedia')">
+        SISTER GROUP
+    </button>
+
+    <button class="header-btn" onclick="navigateWithTransition('songs.html')">
+        DISCOGRAPHY
+    </button>
+
+    <button class="header-btn" data-page="teams" onclick="alert('Belum tersedia')">
+        TEAMS HISTORY
+    </button>
+
+    <button class="header-btn" onclick="openWithDelay()">
+        REQUEST HOUR 2026
+    </button>
+
+    <div class="header-right">
+        <button class="header-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+        <button class="header-btn" onclick="alert('Bantuan belum tersedia')">
+            BANTUAN ?
+        </button>
+    </div>
+
+</div>
+
+<!-- ================= PROFILE ================= -->
+<div class="page">
+    <div id="profile-wrapper"></div>
+</div>
+
+<audio id="bgm" loop></audio>
+
+<script>
+
+function setBackground(team) {
+
+    const backgrounds = {
+        "TeamLove": "Backgrounds/Love.png",
+        "TeamDream": "Backgrounds/Dream.png",
+        "TeamPassion": "Backgrounds/Passion.png",
+        "Trainee": "Backgrounds/Trainee.png",
+        "Virtual": "Backgrounds/Virtual.png"
+    };
+
+    const bg = backgrounds[team] || "Backgrounds/Love.png";
+
+    document.body.style.backgroundImage = `url("${bg}")`;
+}
+
+const members = [
+
+    // ================= TEAM LOVE (15) ================= //
+    { name: "Alya Amanda", nickname: "Alya", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Alya.jpg", birth: "2006-08-26", height: 162, blood: "A" },
+    { name: "Anindya Ramadhani", nickname: "Anindya", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Anindya.jpg", birth: "2005-10-18", height: 153, blood: "O" },
+    { name: "Aurellia", nickname: "Lia", gen: "Gen 10", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Lia.jpg", birth: "2002-10-29", height: 157, blood: "O" },
+    { name: "Aurhel Alana", nickname: "Lana", gen: "Gen 12", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Lana.jpg", birth: "2006-09-14", height: 162, blood: "A" },
+    { name: "Cathleen Nixie", nickname: "Cathy", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Cathy.jpg", birth: "2009-05-28", height: 162, blood: "A", status: "Graduation" },
+    { name: "Celline Thefani", nickname: "Elin", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Elin.jpg", birth: "2007-04-09", height: 164, blood: "O" },
+    { name: "Cynthia Yaputera", nickname: "Cynthia", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Cynthia.jpg", birth: "2003-11-22", height: 160, blood: "o" },
+    { name: "Fiony Alveria", nickname: "Fiony", gen: "Gen 7", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Fiony.jpg", birth: "2002-02-09", height: 164, blood: "o" },
+    { name: "Fritzy Rosmerian", nickname: "Fritzy", gen: "Gen 12", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Fritzy.jpg", birth: "2008-07-28", height: 155, blood: "A" },
+    { name: "Grace Octaviani", nickname: "Gracie", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Gracie.jpg", birth: "2007-10-18", height: 166, blood: "B" },
+    { name: "Hillary Abigail", nickname: "Lily", gen: "Gen 12", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Lily.jpg", birth: "2007-10-19", height: 163, blood: "O" },
+    { name: "Indah Cahya", nickname: "Indah", gen: "Gen 9", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Indah.jpg", birth: "2001-03-20", height: 169, blood: "A" },
+    { name: "Jazzlyn Trisha", nickname: "Trisha", gen: "Gen 12", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Trisha.jpg", birth: "2011-02-16", height: 161, blood: "O" },
+    { name: "Michelle Alexandra", nickname: "Michie", gen: "Gen 11", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Miche.jpg", birth: "2009-04-22", height: 162, blood: "O" },
+    { name: "Nayla Suji", nickname: "Nayla", gen: "Gen 12", team: "TeamLove", photo: "Members/Kabesha/TeamLove/Nayla.jpg", birth: "2007-06-18", height: 163, blood: "AB" },
+
+    // ================= TEAM DREAM (14) ================= //
+    { name: "Freya Jayawardana", nickname: "Freya", gen: "Gen 7", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Freya.jpg", birth: "2006-02-13", height: 161, blood: "B" },
+    { name: "Adeline Wijaya", nickname: "Delynn", gen: "Gen 12", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Delynn.jpg", birth: "2007-09-01", height: 167, blood: "B" },
+    { name: "Chelsea Davina", nickname: "Chelsea", gen: "Gen 11", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Chelsea.jpg", birth: "2009-12-23", height: 169, blood: "B", status: "Graduation" },
+    { name: "Febriola Sinambela", nickname: "Olla", gen: "Gen 7", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Olla.jpg", birth: "2005-02-26", height: 157, blood: "B" },
+    { name: "Gabriela Abigail", nickname: "Ella", gen: "Gen 10", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Ella.jpg", birth: "2006-08-07", height: 161, blood: "B" },
+    { name: "Gendis Mayrannisa", nickname: "Gendis", gen: "Gen 11", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Gendis.jpg", birth: "2010-06-23", height: 161, blood: "B", status: "Suspended" },
+    { name: "Gita Sekar Andarini", nickname: "Gita", gen: "Gen 6", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Gita.jpg", birth: "2001-06-30", height: 165, blood: "O" },
+    { name: "Greesella Adhalia", nickname: "Greesel", gen: "Gen 11", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Greesel.jpg", birth: "2006-01-10", height: 165, blood: "O" },
+    { name: "Helisma Putri", nickname: "Eli", gen: "Gen 7", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Eli.jpg", birth: "2000-06-15", height: 167, blood: "A" },
+    { name: "Jesslyn Elly", nickname: "Lyn", gen: "Gen 10", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Lyn.jpg", birth: "2001-09-13", height: 155, blood: "O" },
+    { name: "Marsha Lenathea", nickname: "Marsha", gen: "Gen 9", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Marsha.jpg", birth: "2006-01-09", height: 165, blood: "O" },
+    { name: "Nina Tutachia", nickname: "Nachia", gen: "Gen 12", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Nachia.jpg", birth: "2009-10-16", height: 164, blood: "O" },
+    { name: "Oline Manuel", nickname: "Oline", gen: "Gen 12", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Oline.jpg", birth: "2007-11-03", height: 169, blood: "B" },
+    { name: "Shabilqis Naila", nickname: "Nala", gen: "Gen 12", team: "TeamDream", photo: "Members/Kabesha/TeamDream/Nala.jpg", birth: "2008-09-01", height: 160, blood: "B" },
+
+    // ================= TEAM PASSION (15) ================= //
+    { name: "Abigail Rachel", nickname: "Aralie", gen: "Gen 12", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Aralie.jpg", birth: "2008-08-06", height: 164, blood: "B" },
+    { name: "Angelina Christy", nickname: "Christy", gen: "Gen 7", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Christy.jpg", birth: "2005-12-05", height: 166, blood: "O" },
+    { name: "Catherina Vallencia", nickname: "Erine", gen: "Gen 12", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Erine.jpg", birth: "2007-08-21", height: 162, blood: "B" },
+    { name: "Cornelia Vanisa", nickname: "Oniel", gen: "Gen 8", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Oniel.jpg", birth: "2002-07-26", height: 165, blood: "O" },
+    { name: "Dena Natalia", nickname: "Danella", gen: "Gen 11", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Danella.jpg", birth: "2005-12-16", height: 163, blood: "O" },
+    { name: "Desy Natalia", nickname: "Daisy", gen: "Gen 11", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Daisy.jpg", birth: "2005-12-16", height: 165, blood: "O" },
+    { name: "Feni Fitriyanti", nickname: "Feni", gen: "Gen 3", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Feni.jpg", birth: "1999-01-16", height: 163, blood: "O", status: "Hiatus" },
+    { name: "Jessica Chandra", nickname: "Jessi", gen: "Gen 7", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Jessi.jpg", birth: "2005-09-23", height: 165, blood: "O" },
+    { name: "Kathrina Irene", nickname: "Kathrina", gen: "Gen 9", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Kathrina.jpg", birth: "2006-07-26", height: 166, blood: "A" },
+    { name: "Lulu Salsabila", nickname: "Lulu", gen: "Gen 8", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Lulu.jpg", birth: "2002-10-23", height: 160, blood: "B" },
+    { name: "Michelle Levia", nickname: "Levi", gen: "Gen 12", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Levi.jpg", birth: "2009-01-24", height: 169, blood: "O" },
+    { name: "Mutiara Azzahra", nickname: "Muthe", gen: "Gen 7", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Muthe.jpg", birth: "2004-07-12", height: 165, blood: "B" },
+    { name: "Raisha Syifa", nickname: "Raisha", gen: "Gen 10", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Raisha.jpg", birth: "2007-11-11", height: 169, blood: "AB" },
+    { name: "Ribka Budiman", nickname: "Ribka", gen: "Gen 12", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Ribka.jpg", birth: "2009-01-13", height: 162, blood: "O" },
+    { name: "Victoria Kimberly", nickname: "Kimmy", gen: "Gen 12", team: "TeamPassion", photo: "Members/Kabesha/TeamPassion/Kimmy.jpg", birth: "2010-03-08", height: 162, blood: "AB" },
+
+    // ================= Trainee (19) ================= //
+    { name: "Afera Thalia", nickname: "Fera", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Fera.jpg", birth: "2012-10-20", height: 160, blood: "O" },
+    { name: "Astrella Virgiananda", nickname: "Virgi", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Virgi.jpg", birth: "2010-08-06", height: 164, blood: "AB" },
+    { name: "Aulia Riza", nickname: "Auwia", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Auwia.jpg", birth: "2007-07-14", height: 166, blood: "O" },
+    { name: "Bong Aprilli", nickname: "Rilly", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Rilly.jpg", birth: "2010-04-01", height: 166, blood: "A" },
+    { name: "Carissa Dini", nickname: "Carissa", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Carissa.jpg", birth: "2012-02-02", height: 154, blood: "A" },
+    { name: "Christabella Bonita", nickname: "Bella", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Bella.jpg", birth: "2011-03-02", height: 161, blood: "A" },
+    { name: "Fahira Putri", nickname: "Fahira", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Fahira.jpg", birth: "2012-08-13", height: 152, blood: "O" },
+    { name: "Fatimah Azzahra", nickname: "Rara", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Rara.jpg", birth: "2010-08-30", height: 170, blood: "AB" },
+    { name: "Hagia Sopia", nickname: "Giaa", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Giaa.jpg", birth: "2008-07-01", height: 165, blood: "O" },
+    { name: "Heidi Suyangga", nickname: "Heidi", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Heidi.jpg", birth: "2008-08-27", height: 164, blood: "O" },
+    { name: "Humaira Ramadhani", nickname: "Maira", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Maira.jpg", birth: "2011-08-13", height: 159, blood: "A" },
+    { name: "Jacqueline Immanuela", nickname: "Ekin", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Ekin.jpg", birth: "2009-07-09", height: 161, blood: "B" },
+    { name: "Jemima Evodie", nickname: "Jemima", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Jemima.jpg", birth: "2009-11-09", height: 165, blood: "O" },
+    { name: "Maxine Faye", nickname: "Maxine", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Maxine.jpg", birth: "2011-12-02", height: 164, blood: "B" },
+    { name: "Mikaela Kusjanto", nickname: "Mikaela", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Mikaela.jpg", birth: "2007-12-15", height: 166, blood: "O" },
+    { name: "Nur Intan", nickname: "Intan", gen: "Gen 13", team: "Trainee", photo: "Members/Kabesha/Trainee/Intan.jpg", birth: "2006-02-24", height: 157, blood: "B" },
+    { name: "Putry Jazyta", nickname: "Jazzy", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Jazzy.jpg", birth: "2011-03-12", height: 159, blood: "A" },
+    { name: "Ralyne Van Irwan", nickname: "Ralyne", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Ralyne.jpg", birth: "2011-10-15", height: 152, blood: "AB" },
+    { name: "Sona Kalyana", nickname: "Sona", gen: "Gen 14", team: "Trainee", photo: "Members/Kabesha/Trainee/Sona.jpg", birth: "2011-12-01", height: 154, blood: "O" },
+
+    // ================= Virtual (5) ================= //
+    { name: "Isha Kirana", nickname: "Isha", gen: "Gen 2", team: "Virtual", photo: "Members/Kabesha/Virtual/Isha.jpg", birth: "2007-11-25", height: 160, blood: "A" },
+    { name: "Maura Nilambari", nickname: "Maura", gen: "Gen 2", team: "Virtual", photo: "Members/Kabesha/Virtual/Maura.jpg", birth: "2007-06-21", height: 171, blood: "A" },
+    { name: "Pia Meraleo", nickname: "Pia", gen: "Gen 1", team: "Virtual", photo: "Members/Kabesha/Virtual/Pia.jpg", birth: "2006-07-30", height: 157, blood: "A" },
+    { name: "Sami Maono", nickname: "Sami", gen: "Gen 2", team: "Virtual", photo: "Members/Kabesha/Virtual/Sami.jpg", birth: "2009-10-07", height: 155, blood: "A", status: "Hiatus" },
+    { name: "Tana Nona", nickname: "Tana", gen: "Gen 1", team: "Virtual", photo: "Members/Kabesha/Virtual/Tana.jpg", birth: "2005-04-22", height: 168, blood: "A" },
+
+];
+
+const genDebutDate = {
+    3: "15 Maret 2014",
+    6: "08 April 2018",
+    7: "29 September 2018",
+    8: "27 April 2019",
+    9: "01 Desember 2019",
+    10: "Re-debut 18 Desember 2021",
+    11: "31 Oktober 2022",
+    12: "18 November 2023",
+    13: "31 Oktober 2024",
+    14: "14 Februari 2026",
+    1: "31 Juli 2023",
+    2: "17 Oktober 2025"
+};
+
+function getGenNumber(gen) {
+    return parseInt(gen.replace(/[^0-9]/g, ""));
+}
+
+function getTeamLabel(team) {
+    if (team === "TeamLove") return "Team Love";
+    if (team === "TeamDream") return "Team Dream";
+    if (team === "TeamPassion") return "Team Passion";
+    if (team === "Trainee") return "Trainee";
+    if (team === "Virtual") return "Virtual";
+    return team;
+}
+
+function getGenDescription(genNumber) {
+    const sameGenMembers = members.filter(m => 
+        getGenNumber(m.gen) === genNumber
+    );
+
+    if (sameGenMembers.length === 1) {
+        return `member terakhir dari generasi ${genNumber}`;
+    } else {
+        return `salah satu member dari generasi ${genNumber}`;
+    }
+}
+
+const params = new URLSearchParams(window.location.search);
+const name = decodeURIComponent(params.get("name") || "");
+
+const member = members.find(m => 
+    m.name.toLowerCase() === name.toLowerCase() ||
+    m.nickname.toLowerCase() === name.toLowerCase()
+);
+
+if (!name || !member) {
+    console.warn("Member tidak ditemukan atau param kosong:", name);
+    window.location.href = "members.html";
+}
+
+if (member) {
+    document.title = `Profile (${member.team}) ${member.name} | JKT48`;
+}
+
+if (member) {
+    setBackground(member.team);
+    setBGM(member.team, member.gen);
+}
+
+function getStatus(member) {
+    if (!member.status) return "Aktif";
+
+    if (member.status === "Graduation") {
+        return "Aktif (Grad Annouced)";
+    }
+    return member.status;
+}
+
+function getStatusClass(status) {
+    switch (status) {
+        case "Hiatus":
+            return "status-hiatus";
+        case "Suspended":
+            return "status-suspended";
+        case "Aktif (Grad Annouced)":
+            return "status-grad";
+        default:
+            return "status-aktif";
+    }
+}
+
+const container = document.getElementById("profile-wrapper");
+
+function getjikoshoukai(nickname) {
+
+    const jikoshoukai = {
+
+        "Alya": "Jika hatimu sedang menangis, aku akan datang sebagai pelangi. Halo, aku Alya!!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, nama aku Anindya!",
+        "Lia":"Si social butterfly yang energik dan periang!. Hai, nama aku Lia!",
+        "Lana":"Dengan kekuatan bulan, aku akan menyihirmu dengan pesonaku. Halo semuanya, aku Lana!",
+        "Cathy":"Tringg... Si peri cantik jelita itulah aku. Hai, aku Cathy!",
+        "Elin":"Semanis permen kapas dan seindah bunga lavender! Hollaa, perkenalkan nama aku Elin!",
+        "Cynthia":"Semangatku terus menerus meluap. POP! POP! Halo, aku Cynthia yang selalu semangat!",
+        "Fiony":"Seperti simfoni yang menenangkan hati. Halo aku Fiony!",
+        "Fritzy":"Abracadabra! Si pesulap yang siap membuat hatimu terpikat. Halo semuanya, it's me, Fritzy!",
+        "Gracie":"Manis seperti gulali, imut seperti kelinci! Xi xi xi, Gracie!",
+        "Lily":"Papipapipum! Aku akan mengejutkanmu dengan kehebatanku. Halo, nama aku Lily!",
+        "Indah":"Tak banyak bicara, bercerita melalui tulisan. Halo aku Indah!",
+        "Trisha":"Pelukis yang hadir di mimpi-mimpi indahmu. One… two… tri… sha! Halo semua, aku Trisha!",
+        "Michie":"Always your number one, till infinity and beyond. Hello everyone, it's Michie!. Halo semuanya aku Michie!",
+        "Nayla":"Moshi moshi, welcome Naylalaland. Halo semuanya. Bakkyun! Nama aku Nayla!",
+
+        "Freya":"Gadis koleris yang suka berimajinasi, terangi harimu dengan senyum karamelku. Halo semua, aku Freya!",
+        "Delynn":"Nyemangatin dan ngangenin, siapa yang kamu pikirin? Delynn! Pyong pyong, aku Delynn!",
+        "Chelsea":"As bright as a shooting star in the starry night sky!. Hai semuanya nama aku Chelsea!",
+        "Olla":"Dengan keajaibanku, aku akan membuat kalian selalu tertawa. Halo, aku Olla, si mechanic girl!",
+        "Ella":"Ohayo! Konnichiwa! Oyasumi! Aku ingin ada di setiap harimu. Halo semuanya nama aku Ella!",
+        "Gendis":"Bonjour! Periang dan pencair suasana itulah aku. Halo semuanya, aku Gendis!",
+        "Gita":"Diam bukan berarti tidak memperhatikanmu, aku Gita!",
+        "Greesel":"Pandangan mataku akan menyinari hatimu bagaikan kunang-kunang di malam hari. Halo, aku Greesel!",
+        "Eli":"Bagai lembayung senja, dengan energi kegembiraanku, aku akan menghangatkan suasana. Halo halo, aku Helisma, Eli, Eli, Eli!",
+        "Lyn":"Seperti ombak laut yang tenang, tiba-tiba aku akan menyapumu dengan banyak cinta. Halo semuanya aku Lyn!",
+        "Marsha":"Seperti piza yang dinanti-nantikan semua orang, selalu nantikan aku, ya! Halo, aku Marsha!",
+        "Nachia":"Si panda unyu yang selalu ceria. Hai aku Nachia, bikin kamu bahagia. Halo semuanya aku Nachia!",
+        "Oline":"Semangatku full terus. Gas gas gas Oline!. Hai semuanya aku Oline!",
+        "Nala":"ROAR! Si singa pemberani yang siap menyemangati harimu. Halo semuanya aku Nala",
+
+        "Aralie":"Seperti bunga yang mekar, aku akan membuat kamu, kamu, dan kamu terbayang-bayang. Halo semuanya aku Ara-Aralie!",
+        "Christy":"Peduli dan berbaik hati, siapa dia? Chriiiis-toy! Chriiiis-toy!. Halo semuanya aku Christy!",
+        "Erine":"Hadir dengan seribu kejutan, Checkmate! Siap memenangkan hatimu. Halo semuanya, namaku Erine!",
+        "Oniel":"Seperti teka-teki, kalian akan selalu penasaran denganku. Halo semuanya aku Oniel!",
+        "Danella":"Tok-tok! (Siapa?) Si penari yang akan menarikmu ke duniaku. Hai semuanya, aku Danella!",
+        "Daisy":"Seperti bunga daisy, aku akan memancarkan kesegaran dan kebahagiaan! Hai hai, aku Daisy!",
+        "Feni":"Matahari yang indah, yang akan memberikan kehangatan di setiap harinya. Hai semuanya aku Feni!",
+        "Jessi":"Suka menari dan akan selalu berusaha menjadi sumber energimu. Hai semuanya, aku Jessi!",
+        "Kathrina":"Never miss a chance to be a star. Halo semuanya, aku Kathrina!",
+        "Lulu":"Terang seperti bulan, bersinar seperti bintang. Halo semuanya Aku Lulu!",
+        "Levi":"Are you ready? Jalani hari ini dengan menari bersamaku! Yuhu, aku Levi!",
+        "Muthe":"Dengan kelincahanku aku akan menari setiap harinya. Panggil aku Mu-Mu-Mu-Mut-he!",
+        "Raisha":"Kalau sakura itu kembang, Aku itu kembanggaanmu!. Hai semuanya aku Raisha!",
+        "Ribka":"Mirror mirror on the wall, who's the sweetest in here? It's me, Ribka!",
+        "Kimmy":"Bagai baby hamster yang lincah, aku akan berlari-lari di pikiranmu. Halo-semuanya, katakan Kimmy!. Hai semuanya aku Kimmy!",
+
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        "Anindya":"Si mungil hadir semanis mangga. Hai, aku Anindya!",
+        
+        "Isha":"In The Shadow! Selalu Hadir Menjaga Langkahmu Karena Kebetulan Aja Jalanku Selalu Dekat Denganmu~ Yo! Aku Isha Kirana Dari JKT48 Virtual Generasi 2!",
+        "Maura":"Di Musim Dingin Ada Salju, Di Hatimu Ada Aku! - Hai! Aku Maura Nilambari dari JKT48 Virtual Generasi 2! A Cool Girl With A Warm Heart, Salam Kenal!",
+        "Pia":"We Are On Fire! Semangat ku membara, siap menghangatkan hari-hari mu! Halo, aku Pia Meraleo dari JKT48 Virtual Generasi 1",
+        "Sami":"Jangan Coba-Coba Tutup Pintu Hatimu Atau Akan Aku Dobrak Dengan Anginku! Angin Siapaaa? SAMI!!!! Awoo Awoo~ Halooo! Aku Sami Maono Dari JKT48 Virtual Generasi 2!",
+        "Tana":"Hai wazzup ma brozz! I'm fresh like a breeze. Cool enough to make you frrEezZZeEee Hallo aku Tana Nona dari JKT48 Virtual Generasi 1!",
+    };
+
+    return jikoshoukai[nickname] || "Jikoshoukai belum tersedia.";
+}
+
+const fanbaseByMember = {
+    // ================= TEAM LOVE ================= //
+    "Alya Amanda": "Alamanda",
+    "Anindya Ramadhani": "Aninimous",
+    "Aurellia": "Liamelior",
+    "Aurhel Alana": "Lanautica",
+    "Cathleen Nixie": "Cathleenexus",
+    "Celline Thefani": "Cellineyours",
+    "Cynthia Yaputera": "Cynthiaction",
+    "Fiony Alveria": "Symfiony",
+    "Fritzy Rosmerian": "Fritzy Force",
+    "Grace Octaviani": "Gracieluv",
+    "Hillary Abigail": "Hillaryours",
+    "Indah Cahya": "Interindah",
+    "Jazzlyn Trisha": "TACT",
+    "Michelle Alexandra": "Michiban",
+    "Nayla Suji": "Nayrakuen",
+
+    // ================= TEAM DREAM ================= //
+    "Freya Jayawardana": "Freyanation",
+    "Adeline Wijaya": "Delynessence",
+    "Chelsea Davina": "Chelsealand",
+    "Febriola Sinambela": "Oracle",
+    "Gabriela Abigail": "Ellatheria",
+    "Gendis Mayrannisa": "Gendiscious",
+    "Gita Sekar Andarini": "Gitroops",
+    "Greesella Adhalia": "Degrees",
+    "Helisma Putri": "Helismiley",
+    "Jesslyn Elly": "Lynear",
+    "Marsha Lenathea": "MarshaOshi",
+    "Nina Tutachia": "Yokinachia",
+    "Oline Manuel": "OlinEver",
+    "Shabilqis Naila": "Nalania",
+
+    // ================= TEAM PASSION ================= //
+    "Abigail Rachel": "Arariel",
+    "Angelina Christy": "Christyzer",
+    "Catherina Vallencia": "Cavallery",
+    "Cornelia Vanisa": "Onielity",
+    "Dena Natalia": "Denalize",
+    "Desy Natalia": "Daisyne",
+    "Feni Fitriyanti": "Fenidelity",
+    "Jessica Chandra": "Jessination",
+    "Kathrina Irene": "KATH, Inc",
+    "Lulu Salsabila": "Lunarian",
+    "Michelle Levia": "Le Viosa",
+    "Mutiara Azzahra": "Muffin",
+    "Raisha Syifa": "Raishanrise",
+    "Ribka Budiman": "Ribcalls",
+    "Victoria Kimberly": "GROVY",
+
+    // ================= TRAINEE (COMING SOON) =================
+    "Trainee": "Coming Soon",
+
+    // ================= VIRTUAL ================= //
+    "Virtual": "Wargavi48"
+};
+
+const riwayatMiniCardByMember = {
+
+    // ================= TEAM LOVE ================= //
+    
+    "Alya": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Anindya": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Lia": [
+        { img: "Logo Teams/JKT48.jpg", title: "2020.08.27", value: "Siswi Akademi Kelas B (Generasi 10)" },
+        { img: "Logo Teams/JKT48.jpg", title: "2020.12.03", value: "Pembatalan Siswi Akademi Kelas B"  },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.12.18", value: "Bergabung Kembali Trainee JKT48 NEW ERA (Generasi 10)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.05.08", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Lana": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2025.05.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Cathy": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Elin": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Cynthia": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Fiony": [
+        { img: "Logo Teams/JKT48.jpg", title: "2019.04.27", value: "Siswi Akademi Kelas B (Generasi 8)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2019.06.30", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2020.06.02", value: "Team T" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.12", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love"  }
+    ],
+
+    "Fritzy": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2025.05.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Gracie": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.02.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Lily": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Indah": [
+        { img: "Logo Teams/JKT48.jpg", title: "2019.12.01", value: "Siswi Akademi Kelas B (Generasi 9)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2020.01.25", value: "Akademi Kelas A" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.11", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Trisha": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+    
+    "Michie": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    "Nayla": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/LOVE.jpg", title: "2026.04.01-SEKARANG", value: "Team Love" }
+    ],
+
+    // ================= TEAM DREAM ================= //
+
+    "Freya": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.09.29", value: "Siswi Akademi Kelas B (Generasi 7)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2018.12.18", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2020.06.02", value: "Team T" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.12", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream"  }
+    ],
+
+    "Delynn": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Chelsea": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Olla": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.09.29", value: "Siswi Akademi Kelas B (Generasi 7)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2018.12.18", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2020.06.01", value: "Team T" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.12", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Ella": [
+        { img: "Logo Teams/JKT48.jpg", title: "2020.08.27", value: "Siswi Akademi Kelas B (Generasi 10)" },
+        { img: "Logo Teams/JKT48.jpg", title: "2020.12.03", value: "Pembatalan Siswi Akademi Kelas B"  },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.12.18", value: "Bergabung Kembali Trainee JKT48 NEW ERA (Generasi 10)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.05.08", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Gendis": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Gita": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.04.08", value: "Siswi Akademi Kelas B (Generasi 6)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2018.08.13", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM KIII.jpg", title: "2019.04.27", value: "Team KIII" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.13", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Greesel": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.02.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Eli": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.09.29", value: "Siswi Akademi Kelas B (Generasi 7)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2018.10.30", value: "Akademi Kelas A" },
+        { img: "Logo Teams/Team KIII.jpg", title: "2019.07.21", value: "Team KIII" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.13", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Lyn": [
+        { img: "Logo Teams/JKT48.jpg", title: "2020.08.27", value: "Siswi Akademi Kelas B (Generasi 10)" },
+        { img: "Logo Teams/JKT48.jpg", title: "2020.12.03", value: "Pembatalan Siswi Akademi Kelas B"  },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.12.18", value: "Bergabung Kembali Trainee JKT48 NEW ERA (Generasi 10)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.05.08", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Marsha": [
+        { img: "Logo Teams/JKT48.jpg", title: "2019.12.01", value: "Siswi Akademi Kelas B (Generasi 9)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2020.01.25", value: "Akademi Kelas A" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.11", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Nachia": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Oline": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    "Nala": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Dream" }
+    ],
+
+    // ================= TEAM PASSION ================= //
+
+    "Aralie": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Christy": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.09.29", value: "Siswi Akademi Kelas B (Generasi 7)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2018.10.30", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM KIII.jpg", title: "2019.04.27", value: "Team KIII" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.13", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Erine": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Oniel": [
+        { img: "Logo Teams/JKT48.jpg", title: "2019.04.27", value: "Siswi Akademi Kelas B (Generasi 8)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2019.05.26", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2020.06.01", value: "Team T" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.12", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion"  }
+    ],
+
+    "Danella": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Daisy": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2022.10.31", value: "Trainee JKT48 NEW ERA (Generasi 11)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.11.01", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/DREAM.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Feni": [
+        { img: "Logo Teams/JKT48.jpg", title: "2014.03.15", value: "Trainee (Generasi 3)" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2015.01.24", value: "Team T" },
+        { img: "Logo Teams/TEAM KIII.jpg", title: "2016.09.11", value: "Team KIII" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.14", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Jessi": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.09.29", value: "Siswi Akademi Kelas B (Generasi 7)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2019.01.26", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2020.05.30", value: "Team T" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.12", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion"  }
+    ],
+
+    "Kathrina": [
+        { img: "Logo Teams/JKT48.jpg", title: "2019.12.01", value: "Siswi Akademi Kelas B (Generasi 9)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2020.01.25", value: "Akademi Kelas A" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.11", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Lulu": [
+        { img: "Logo Teams/JKT48.jpg", title: "2019.04.27", value: "Siswi Akademi Kelas B (Generasi 8)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2019.05.28", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM T.jpg", title: "2020.05.29", value: "Team T" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.12", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion"  }
+    ],
+
+    "Levi": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Muthe": [
+        { img: "Logo Teams/JKT48.jpg", title: "2018.09.29", value: "Siswi Akademi Kelas B (Generasi 7)" },
+        { img: "Logo Teams/AKADEMI.jpg", title: "2018.10.30", value: "Akademi Kelas A" },
+        { img: "Logo Teams/TEAM KIII.jpg", title: "2019.07.21", value: "Team KIII" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.03.13", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Raisha": [
+        { img: "Logo Teams/JKT48.jpg", title: "2020.08.27", value: "Siswi Akademi Kelas B (Generasi 10)" },
+        { img: "Logo Teams/JKT48.jpg", title: "2020.12.03", value: "Pembatalan Siswi Akademi Kelas B"  },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2021.12.18", value: "Bergabung Kembali Trainee JKT48 NEW ERA (Generasi 10)" },
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.05.08", value: "REGULAR MEMBER JKT48 NEW ERA" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Ribka": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    "Kimmy": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2023.11.18", value: "Trainee JKT48 NEW ERA (Generasi 12)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01", value: "REGULAR MEMBER JKT48 FIGHT!" },
+        { img: "Logo Teams/PASSION.jpg", title: "2026.04.01-SEKARANG", value: "Team Passion" }
+    ],
+
+    // ================= TRAINEE ================= //
+
+    "Fera": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Virgi": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Auwia": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Rilly": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Carissa": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Bella": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Fahira": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Rara": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Giaa": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Heidi": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Maira": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Ekin": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Jemima": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Maxine": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Mikaela": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Intan": [
+        { img: "Logo Teams/JKT48 NEW ERA.jpg", title: "2024.10.31", value: "Trainee JKT48 NEW ERA (Generasi 13)" },
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.01.01-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 13)" },
+    ],
+    
+    "Jazzy": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Ralyne": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    "Sona": [
+        { img: "Logo Teams/JKT48 FIGHT!.jpg", title: "2026.02.14-SEKARANG", value: "Trainee JKT48 FIGHT! (Generasi 14)" },
+    ],
+    
+    // ================= VIRTUAL ================= //
+    
+    "Isha": [
+        { img: "Logo Teams/JKT48V.jpg", title: "2025.10.17-SEKARANG", value: "JKT48 VIRTUAL Generasi 2 (Debut Stream: 2025.11.22)" },
+    ],
+    
+    "Maura": [
+        { img: "Logo Teams/JKT48V.jpg", title: "2025.10.17-SEKARANG", value: "JKT48 VIRTUAL Generasi 2 (Debut Stream: 2025.11.23)" },
+    ],
+    
+    "Pia": [
+        { img: "Logo Teams/JKT48V.jpg", title: "2023.07.31-SEKARANG", value: "JKT48 VIRTUAL Generasi 1 (Debut Stream: 2023.08.25" },
+    ],
+    
+    "Sami": [
+        { img: "Logo Teams/JKT48V.jpg", title: "2025.10.17-SEKARANG", value: "JKT48 VIRTUAL Generasi 2 (Debut Stream: 2025.11.21)" },
+    ],
+    
+    "Tana": [
+        { img: "Logo Teams/JKT48V.jpg", title: "2023.07.31-SEKARANG", value: "JKT48 VIRTUAL Generasi 1 (Debut Stream: 2023.08.23)" },
+    ],
+    
+};
+
+const songsParticipation = [
+
+    {
+        img: "Discography/All/ZD.jpg",
+        label: "Senbatsu Single",
+        value: "LOVE TRIP",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZU.jpg",
+        label: "Senbatsu Single",
+        value: "Everyday, Kachuusha",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZV.jpg",
+        label: "Senbatsu Single",
+        value: "UZA",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZJ.jpg",
+        label: "Senbatsu Single",
+        value: "High Tension",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZK.jpg",
+        label: "Senbatsu Single",
+        value: "Rapsodi",
+        members: ["Feni", "Christy", "Eli",],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/A.jpg",
+        label: "Senbatsu Single",
+        value: "Cara Ceroboh Untuk Mencinta",
+        members: ["Fiony", "Indah", "Gita", "Freya", "Olla", "Eli", "Marsha", "Feni", "Christy", "Jessi", "Oniel", "Lulu", "Muthe", "Kathrina"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/B.jpg",
+        label: "Senbatsu Single",
+        value: "Flying High",
+        members: ["Feni", "Fiony", "Marsha", "Christy"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZL.jpg",
+        label: "Digital Single",
+        value: "JKT48 Circus",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZM.jpg",
+        label: "Digital Single",
+        value: "JKT48 Sousenkyo 2018 Top 3",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZN.jpg",
+        label: "Digital Single",
+        value: "JKT48 Circus Part 3",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/C.jpg",
+        label: "Digital Single",
+        value: "Masa Depan Yang Menyilaukan Mata",
+        members: ["Lia", "Anindya", "Alya", "Cathy", "Elin", "Cynthia", "Gracie", "Miche", "Chelsea", "Ella", "Gendis", "Lyn", "Aralie", "Dena", "Daisy", "Raisha"],
+        center: ["Ella"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/D.jpg",
+        label: "Digital Single",
+        value: "Ponytail dan Shu-Shu (2023 Ver.)",
+        members: ["Fiony", "Indah", "Gita", "Freya", "Olla", "Eli", "Marsha", "Feni", "Christy", "Jessi", "Oniel", "Lulu", "Muthe", "Kathrina"],
+        center: [],
+        undergirls: [],
+        doublecenter: ["Christy"]
+    },
+    {
+        img: "Discography/All/E.jpg",
+        label: "Digital Single",
+        value: "Kebun Binatang Saat Hujan (New Era Ver.)",
+        members: ["Gita", "Freya", "Ella", "Marsha", "Christy"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/F.jpg",
+        label: "Senbatsu Single",
+        value: "Sayonara Crawl",
+        members: ["Fiony", "Indah", "Gita", "Eli", "Marsha", "Feni", "Christy", "Muthe", "Kathrina"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/G.jpg",
+        label: "Digital Single",
+        value: "Ini Ramadan Kita (JKT48 X NASIDA RIA)",
+        members: ["Indah", "Freya", "Gita", "Chelsea", "Gendis", "Muthe"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/H.jpg",
+        label: "Digital Single",
+        value: "Langit Biru Cinta Searah (New Era Ver.)",
+        members: ["Freya", "Ella", "Greesel", "Eli", "Oniel", "Lulu","Pia"],
+        center: ["Lulu"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/I.jpg",
+        label: "Senbatsu Single",
+        value: "Magic Hour",
+        members: ["Fiony", "Freya", "Gita", "Marsha", "Feni", "Christy", "Jessi", "Muthe", "Kathrina"],
+        center: [],
+        undergirls: [],
+        doublecenter: ["Marsha"]
+    },
+    {
+        img: "Discography/All/J.jpg",
+        label: "Digital Single",
+        value: "Belalang Yang Membangkang",
+        members: ["Alya","Anindya","Cathy","Elin","Cynthia","Michie","Lana","Fritzy","Lily","Trisha","Nayla","Delynn","Chelsea","Gendis","Nachia","Oline","Nala","Danella","Daisy","Aralie","Erine","Levi","Ribka","Kimmy"],
+        center: ["Michie"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/K.jpg",
+        label: "Digital Single",
+        value: "Saatnya Kesempatan",
+        members: ["Indah", "Fiony", "Freya", "Olla", "Ella", "Gita", "Eli", "Lyn", "Marsha", "Aralie", "Christy", "Erine", "Oniel", "Danella", "Daisy", "Feni", "Jessi", "Kathrina", "Lulu", "Levi", "Muthe", "Raisha", "Ribka", "Kimmy"],
+        center: ["Marsha"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/L.jpg",
+        label: "Digital Single",
+        value: "LapTime Masa Remaja (2024 Ver.)",
+        members: ["Lia", "Fiony", "Indah", "Freya", "Olla", "Ella", "Gita", "Greesel", "Eli", "Lyn", "Marsha", "Gracie", "Christy", "Oniel", "Feni", "Jessi", "Kathrina", "Lulu", "Muthe", "Raisha"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/M.jpg",
+        label: "Digital Single",
+        value: "Ingatan Kosmos",
+        members: ["Lia", "Alya", "Anindya", "Cathy", "Elin", "Cynthia", "Fiony", "Gracie", "Indah", "Freya", "Chelsea", "Olla", "Ella", "Gendis", "Gita", "Greesel", "Eli", "Lyn", "Marsha", "Christy", "Oniel", "Danella", "Daisy", "Feni", "Jessi", "Kathrina", "Lulu", "Muthe", "Raisha"],
+        center: [],
+        undergirls: [],
+        doublecenter: ["Christy"]
+    },
+    {
+        img: "Discography/All/N.jpg",
+        label: "Digital Single",
+        value: "Waktunya Membuktikan (JKT48 X Musikal Keluarga Cemara)",
+        members: ["Lia", "Fiony", "Freya", "Gita", "Marsha", "Christy", "Oniel", "Feni", "Jessi", "Lulu", "Muthe"],
+        center: ["Feni"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/O.jpg",
+        label: "Senbatsu Single",
+        value: "#KuSangatSuka",
+        members: ["Lia", "Fiony", "Freya", "Gita", "Marsha", "Christy", "Oniel", "Feni", "Jessi", "Lulu", "Muthe"],
+        center: ["Feni"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/Y.jpg",
+        label: "Coupling Songs",
+        value: "Pareo Adalah Emerald",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/Z.jpg",
+        label: "Coupling Songs",
+        value: "Refrain Penuh Harapan",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZA.jpg",
+        label: "Coupling Songs",
+        value: "Halloween Night",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZB.jpg",
+        label: "Coupling Songs",
+        value: "BEGINNER",
+        members: ["Feni"],
+        center: [],
+        undergirls: ["Feni"],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZC.jpg",
+        label: "Coupling Songs",
+        value: "HANYA LIHAT KEDEPAN",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZD.jpg",
+        label: "Coupling Songs",
+        value: "LOVE TRIP",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZE.jpg",
+        label: "Coupling Songs",
+        value: "LUAR BIASA",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZF.jpg",
+        label: "Coupling Songs",
+        value: "SO LONG!",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZG.jpg",
+        label: "Coupling Songs",
+        value: "Indahnya Senyum Manismu DST.",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZH.jpg",
+        label: "Coupling Songs",
+        value: "DIRIMU MELODY",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZI.jpg",
+        label: "Coupling Songs",
+        value: "Everyday, Kachuusha / UZA",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZJ.jpg",
+        label: "Coupling Songs",
+        value: "HIGH TENSION",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZK.jpg",
+        label: "Coupling Songs",
+        value: "Rapsodi",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/O.jpg",
+        label: "Coupling Songs",
+        value: "Bibir Yang Telah Dicuri",
+        members: ["Lana", "Cathy", "Gracie", "Indah", "Delynn", "Olla", "Ella", "Greesel", "Eli", "Erine", "Kathrina"],
+        center: ["Indah"],
+        undergirls: ["Lana", "Cathy", "Gracie", "Indah", "Delynn", "Olla", "Ella", "Greesel", "Eli", "Erine", "Kathrina"],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/P.jpg",
+        label: "Digital Single",
+        value: "GO AND FIGHT!",
+        members: ["Alya", "Lia", "Lana", "Elin", "Fritzy", "Gracie", "Michie", "Chelsea", "Ella", "Gendis", "Greesel", "Lyn"],
+        center: ["Michie"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/Q.jpg",
+        label: "Digital Single",
+        value: "Raja Hati",
+        members: ["Indah", "Fiony", "Freya", "Gita", "Marsha", "Christy", "Oniel", "Feni", "Jessi", "Lulu", "Muthe"],
+        center: [],
+        undergirls: [],
+        doublecenter: ["Feni", "Christy"]
+    },
+    {
+        img: "Discography/All/R.jpg",
+        label: "Digital Single",
+        value: "Percik Kecil (JKT48 X BERNADYA)",
+        members: ["Fiony", "Gita", "Freya", "Marsha", "Christy", "Jessi", "Kathrina", "Muthe", "Ella", "Greesel", "Michie"],
+        center: ["Freya"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/S.jpg",
+        label: "Digital Single",
+        value: "Oh My Pumpkin!",
+        members: ["Alya", "Anindya", "Lia", "Cathy", "Elin", "Cynthia", "Fiony", "Gracie", "Indah", "Michie", "Freya", "Chelsea", "Olla", "Gendis", "Gita", "Greesel", "Eli", "Lyn", "Marsha", "Christy", "Oniel", "Danella", "Daisy", "Jessi", "Kathrina", "Lulu", "Muthe", "Raisha"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZO.jpg",
+        label: "Setlist/Album",
+        value: "MAHAGITA",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZP.jpg",
+        label: "Setlist/Album",
+        value: "JKT48 FESTIVAL GREQTEST HITS",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZQ.jpg",
+        label: "Setlist/Album",
+        value: "B.E.L.I.E.V.E",
+        members: ["Feni"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZR.jpg",
+        label: "Setlist/Album",
+        value: "JOY KICK! TEARS",
+        members: ["Fiony", "Freya", "Olla", "Eli", "Gita", "Feni", "Christy", "Jessi", "Muthe", "Oniel", "Lulu"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZS.jpg",
+        label: "Setlist/Album",
+        value: "THIS IS JKT48 NEW ERA",
+        members: ["Fiony", "Indah", "Freya", "Olla", "Gita", "Eli", "Marsha", "Feni", "Christy", "Oniel", "Jessi", "Kathrina", "Lulu", "Muthe"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/ZT.jpg",
+        label: "Setlist/Album",
+        value: "Mahagita Vol.2",
+        members: ["Lia", "Alya", "Anindya", "Cathy", "Elin", "Cynthia", "Fiony", "Gracie", "Indah", "Michie", "Freya", "Chelsea", "Olla", "Ella", "Gendis", "Gita", "Greesel", "Eli", "Lyn", "Marsha", "Aralie", "Christy", "Oniel", "Danella", "Daisy", "Feni", "Jessi", "Kathrina", "Lulu", "Muthe", "Raisha"],
+        center: [],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/T.jpg",
+        label: "Senbatsu Single",
+        value: "Andai 'Ku Bukan Idola",
+        members: ["Fiony", "Freya", "Gita", "Marsha", "Christy", "Jessi", "Kathrina", "Muthe", "Gracie", "Michie", "Greesel", "Olla"],
+        center: ["Fiony"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/U.jpg",
+        label: "Digital Single",
+        value: "12 Seconds",
+        members: ["Alya", "Anindya", "Lia", "Lana", "Cathy", "Elin", "Cynthia", "Fiony", "Fritzy", "Gracie", "Lily", "Indah", "Trisha", "Michie", "Nayla"],
+        center: ["Fiony", "Michie"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/V.jpg",
+        label: "Digital Single",
+        value: "Wakaka People",
+        members: ["Freya", "Delynn", "Chelsea", "Olla", "Ella", "Gita", "Greesel", "Eli", "Lyn", "Marsha", "Nachia", "Oline", "Nala"],
+        center: ["Marsha"],
+        undergirls: [],
+        doublecenter: []
+    },
+    {
+        img: "Discography/All/W.jpg",
+        label: "Digital Single",
+        value: "Dekat Namun Jauh",
+        members: ["Aralie", "Christy", "Erine", "Oniel", "Danella", "Daisy", "Jessi", "Kathrina", "Lulu", "Levi", "Muthe", "Raisha", "Ribka", "Kimmy"],
+        center: ["Christy"],
+        undergirls: [],
+        doublecenter: []
+    },
+];
+
+
+function normalizeName(text) {
+    return String(text || "").trim().toLowerCase();
+}
+
+function isMemberInList(list, nickname) {
+    return Array.isArray(list) && list.some(name =>
+        normalizeName(name) === normalizeName(nickname)
+    );
+}
+
+function buildPartisipasiFromSongs(songs) {
+    const result = {};
+
+    songs.forEach(song => {
+        song.members.forEach(nickname => {
+            const member = members.find(m =>
+                normalizeName(m.nickname) === normalizeName(nickname)
+            );
+
+            if (!member) {
+                console.warn("Nickname member tidak ditemukan:", nickname, "di lagu:", song.value);
+                return;
+            }
+
+            if (!result[member.name]) {
+                result[member.name] = [];
+            }
+
+            result[member.name].push({
+                img: song.img,
+                label: song.label,
+                value: song.value,
+                category: song.category,
+                center: isMemberInList(song.center, member.nickname),
+                doublecenter: isMemberInList(song.doublecenter, member.nickname),
+                undergirls: song.undergirls === true || isMemberInList(song.undergirls, member.nickname)
+            });
+        });
+    });
+
+    return result;
+}
+
+const partisipasiMiniCardByMember = buildPartisipasiFromSongs(songsParticipation);
+
+function renderMiniCards(cards, options = {}) {
+    const showTitle = options.showTitle !== false;
+
+    return cards.map(card => `
+        <div class="mini-card">
+            ${(card.center || card.undergirls || card.doublecenter) ? `
+                <div class="mini-card-badges">
+                    ${card.center ? `<div class="center-badge">Center</div>` : ""}
+                    ${card.undergirls ? `<div class="undergirls-badge">Undergirls</div>` : ""}
+                    ${card.doublecenter ? `<div class="double-center-badge">Double Center</div>` : ""}
+                </div>
+            ` : ""}
+
+            <div class="mini-photo">
+                <img src="${card.img}">
+            </div>
+
+            ${showTitle ? `<p>${card.title || card.label || ""}</p>` : ""}
+            <span>${card.value}</span>
+        </div>
+    `).join("");
+}
+
+const partisipasiCategories = [
+    { key: "senbatsu", label: "Senbatsu Single", badgeClass: "badge-senbatsu" },
+    { key: "coupling", label: "Coupling Songs", badgeClass: "badge-coupling" },
+    { key: "digital", label: "Digital Single", badgeClass: "badge-digital" },
+    { key: "setlist", label: "Setlist/Album", badgeClass: "badge-setlist" }
+];
+
+function getGenDebutYear(gen) {
+    const genNumber = getGenNumber(gen);
+    const debut = genDebutDate[genNumber] || "";
+
+    const match = debut.match(/\d{4}/);
+    return match ? match[0] : "-";
+}
+
+function getDefaultRiwayatCards(member) {
+    return [
+        { img: "Images/single.jpg", title: getGenDebutYear(member.gen), value: member.gen },
+        { img: "Images/single.jpg", title: "2026", value: getTeamLabel(member.team) }
+    ];
+}
+
+function getPartisipasiCategory(card) {
+    if (card.category) return card.category;
+
+    const label = (card.label || card.title || "").toLowerCase();
+
+    if (label.includes("coupling")) return "coupling";
+    if (label.includes("digital")) return "digital";
+    if (label.includes("album") || label.includes("setlist") || label.includes("special")) return "setlist";
+    if (label.includes("senbatsu") || label.includes("single")) return "senbatsu";
+
+    return "setlist";
+}
+
+function renderPartisipasiMiniCards(cards) {
+    const groupedCards = partisipasiCategories.map(category => {
+        const items = cards.filter(card => getPartisipasiCategory(card) === category.key);
+
+        if (!items.length) return "";
+
+        return `
+            <div class="partisipasi-group partisipasi-${category.key}">
+                <div class="partisipasi-badge ${category.badgeClass}">
+                    ${category.label}
+                </div>
+
+                <div class="inner-grid">
+                    ${renderMiniCards(items, { showTitle: false })}
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    return groupedCards || `<span>Coming Soon</span>`;
+}
+
+function getDefaultPartisipasiCards() {
+    return [
+        { img: "Images/single.jpg", category: "senbatsu", value: "Coming Soon" },
+        { img: "Images/single.jpg", category: "coupling", value: "Coming Soon" },
+        { img: "Images/single.jpg", category: "digital", value: "Coming Soon" },
+        { img: "Images/single.jpg", category: "setlist", value: "Coming Soon" }
+    ];
+}
+
+    container.innerHTML = `
+        <div class="profile-container ${member.team}">
+        <div class="profile-layout">
+
+            <!-- BOX FOTO -->
+            <div class="box-photo">
+                <div class="photo-frame">
+                    <div class="photo-wrapper">
+                        <img class="member-photo" src="${member.photo}">
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOX INFO -->
+            <div class="box-info">
+
+                <div class="profile-header">
+                    <div class="member-title">
+                        ${member.name}
+                    </div>
+                    <div class="member-gen-text"
+                        style="
+                            color: ${getGenColor(member.gen)};
+                            text-shadow:
+                                0.5px 0.5px 0 #000,
+                                -0.5px -0.5px 0 #000,
+                                0.5px -0.5px 0 #000,
+                                -0.5px 0.5px 0 #000;
+                        ">
+                        Generasi ${member.gen.replace(/Gen\s*/i, "")}
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <div class="info-box full">
+                        <p>🎤 Jikoshoukai 🎤</p>
+                        <span>
+                            ${getjikoshoukai(member.nickname)}
+                        </span>
+                    </div>
+
+                    <div class="info-box">
+                        <p>📅 Tanggal Lahir 📅</p>
+                        <span>
+                            ${formatTanggal(member.birth)}
+                        </span>
+                    </div>
+
+                    <div class="info-box">
+                        <p>📌 Status 📌</p>
+                        <span class="${getStatusClass(getStatus(member))}">
+                            ${getStatus(member)}
+                        </span>
+                    </div>
+
+                    <div class="info-box">
+                        <p>🏷️ Nama Panggilan 🏷️</p>
+                            <span class="member-nickname">
+                                ${member.nickname}
+                            </span>
+
+                    </div>
+
+                    <div class="info-box">
+                        <p>⭐ Horoskop ⭐</p>
+                            <span>
+                                ${getZodiac(member.birth)}
+                            </span>
+                    </div>
+
+                    <div class="info-box">
+                        <p>📏 Tinggi 📏</p>
+                            <span>
+                                ${member.height} cm
+                            </span>
+                    </div>
+
+                    <div class="info-box">
+                        <p>🩸 Golongan Darah 🩸</p>
+                            <span>
+                                ${member.blood}
+                            </span>
+                    </div>
+                    
+                    <div class="double-row">
+                        <div class="info-box">
+                            <p>👥 Fanbase 👥</p>
+                                <span>
+                                    ${fanbaseByMember[member.name] || fanbaseByMember[member.team] || "Fanbase"}
+                                </span>
+                        </div>
+
+                        <div class="info-box">
+                            <p>🚀 Debut🚀</p>
+                                <span>
+                                    ${genDebutDate[getGenNumber(member.gen)] || "-"}
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 2: TAMBAHAN (DI BAWAH) -->
+    <div class="profile-container ${member.team}" style="margin-top: 25px;">
+        <div class="profile-header">
+            <div class="group-name">-=-=-=-=-=-=-=-=-=-=-=-=-=- Tentang ${member.nickname} Di JKT48 -=-=-=-=-=-=-=-=-=-=-=-=-=-</div>
+            <div class="member-title">-=❤️⭐🔥=- ${member.name} -=🔥⭐❤️=-</div>
+        </div>
+
+        <div class="profile-info">
+
+            <!-- ================= RIWAYAT ================= -->
+            <div class="info-box full">
+                <div class="section-title">📜 Riwayat Keanggotaan ${member.nickname} 📜</div>
+
+                <div class="inner-grid">
+                    ${renderMiniCards(
+                        riwayatMiniCardByMember[member.nickname] || getDefaultRiwayatCards(member)
+                    )}
+                </div>
+
+            </div>
+
+            <!-- ================= PARTISIPASI ================= -->
+            <div class="info-box full">
+                <div class="section-title partisipasi-title">🎵 Partisipasi ${member.nickname} di Single, Special Song, Album, DLL 🎵</div>
+
+                <div class="partisipasi-list">
+                        ${renderPartisipasiMiniCards(
+                            partisipasiMiniCardByMember[member.name] || getDefaultPartisipasiCards()
+                        )}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    `;
+
+function goBackMenu() {
+    const transition = document.getElementById("pageTransition");
+
+        transition.style.opacity = "1";
+
+        localStorage.setItem("openMenu", "true");
+
+        setTimeout(() => {
+            window.location.href = "members.html";
+        }, 400);
+    }
+
+function getGenColor(gen) {
+    const number = parseInt(gen.replace(/[^0-9]/g, ""));
+
+    const colors = {
+        1: "#0346c0",
+        2: "#0346c0",
+        3: "#ff69b4",
+        6: "#90ee90",
+        7: "#7fff00",
+        8: "#44a7cb",
+        9: "#44a7cb",
+        10: "#00bfff",
+        11: "#ed7014",
+        12: "#ddc7a0",
+        13: "#ffed29",
+        14: "#4c3674"
+    };
+
+    return colors[number] || "#000000";
+}
+
+window.onerror = function(msg) {
+    console.log("ERROR:", msg);
+};
+
+function navigateWithTransition(url) {
+    const transition = document.getElementById("pageTransition");
+
+    transition.style.opacity = "1";
+    transition.style.pointerEvents = "all";
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 400);
+}
+
+window.addEventListener("load", () => {
+    const transition = document.getElementById("pageTransition");
+    if (transition) {
+        transition.style.opacity = "0";
+    }
+
+    const bgm = document.getElementById("bgm");
+    const btn = document.getElementById("muteBtn");
+
+    const savedMute = localStorage.getItem("bgmMuted") === "true";
+
+    bgm.muted = savedMute;
+    btn.textContent = savedMute ? "🔇" : "🔊";
+});
+
+function renderAllMembers() {
+    const container = document.getElementById("profile-wrapper");
+
+    container.innerHTML = members.map(member => `
+        <div class="member-card ${member.team}">
+            <img src="${member.photo}" />
+            <div>${member.name}</div>
+        </div>
+    `).join("");
+
+    setBackground("TeamLove");
+}
+
+function setBGM(team, gen) {
+
+    const sounds = {
+        "TeamLove": "Musik/TeamLove.mp3",
+        "TeamDream": "Musik/TeamDream.mp3",
+        "TeamPassion": "Musik/TeamPassion.mp3",
+        "Trainee": "Musik/Trainee.mp3",
+        "Virtual_Gen1": "Musik/Virtual.mp3",
+        "Virtual_Gen2": "Musik/Virtual2.mp3"
+    };
+
+    let key = team;
+
+    if (team === "Virtual") {
+        const genNumber = parseInt(gen.replace(/[^0-9]/g, ""));
+
+        if (genNumber === 1) {
+            key = "Virtual_Gen1";
+        } else if (genNumber === 2) {
+            key = "Virtual_Gen2";
+        }
+    }
+
+    const bgm = document.getElementById("bgm");
+
+    if (!sounds[key]) return;
+
+    const newSrc = location.origin + "/" + sounds[key];
+
+    if (bgm.src !== newSrc) {
+        bgm.src = sounds[key];
+        bgm.volume = 0.4;
+
+        bgm.play().catch(() => {
+            console.log("Autoplay diblokir browser");
+        });
+    }
+}
+
+document.body.addEventListener("click", () => {
+    const bgm = document.getElementById("bgm");
+    if (bgm.paused) bgm.play();
+});
+
+function toggleMute() {
+    const bgm = document.getElementById("bgm");
+    const btn = document.getElementById("muteBtn");
+
+    bgm.muted = !bgm.muted;
+
+    if (bgm.muted) {
+        btn.textContent = "🔇";
+    } else {
+        btn.textContent = "🔊";
+    }
+
+    // simpan status ke localStorage
+    localStorage.setItem("bgmMuted", bgm.muted);
+}
+
+function getZodiac(dateStr) {
+    const date = new Date(dateStr);
+    const d = date.getDate();
+    const m = date.getMonth() + 1;
+
+    if ((m==1 && d>=20) || (m==2 && d<=18)) return "Aquarius";
+    if ((m==2 && d>=19) || (m==3 && d<=20)) return "Pisces";
+    if ((m==3 && d>=21) || (m==4 && d<=19)) return "Aries";
+    if ((m==4 && d>=20) || (m==5 && d<=20)) return "Taurus";
+    if ((m==5 && d>=21) || (m==6 && d<=20)) return "Gemini";
+    if ((m==6 && d>=21) || (m==7 && d<=22)) return "Cancer";
+    if ((m==7 && d>=23) || (m==8 && d<=22)) return "Leo";
+    if ((m==8 && d>=23) || (m==9 && d<=22)) return "Virgo";
+    if ((m==9 && d>=23) || (m==10 && d<=22)) return "Libra";
+    if ((m==10 && d>=23) || (m==11 && d<=21)) return "Scorpio";
+    if ((m==11 && d>=22) || (m==12 && d<=21)) return "Sagittarius";
+    return "Capricorn";
+}
+
+function formatTanggal(dateStr) {
+    const date = new Date(dateStr);
+
+    return date.toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+</script>
+
+</body>
+</html>

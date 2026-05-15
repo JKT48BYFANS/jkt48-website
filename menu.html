@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<head>
+
+    <title>MENU</title>
+
+<style>
+
+@font-face {
+    font-family: 'Insanibu';
+    src: url('Fonts/Insanibu.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Insanibc';
+    src: url('Fonts/Insanibc.ttf') format('truetype');
+}
+
+button {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    box-shadow: 0 10px 20px rgb(0, 0, 0);
+    transform: translateY(-3px) scale(1.03);
+}
+
+button:active {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transform: translateY(1px) scale(0.98);
+}
+
+.header-content {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e20514;
+    font-size: 40px;
+    -webkit-text-stroke: 1px #ffffff;
+    font-family: 'Insanibc', sans-serif;
+    letter-spacing: 1.5px;
+}
+
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #e20785 15%, #f69220 50%, #e20514);
+    padding: 20px 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.top-header.show-header {
+    animation: slideDown 0.5s ease forwards;
+}
+
+.header-btn {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.header-btn.show-header-btn {
+    animation: fadeDown 0.4s ease forwards;
+}
+
+#btnBack, #btnHelp {
+    font-family: 'Insanibu', sans-serif;
+    padding: 3px 6px;
+    font-size: 15px;
+    background-color: #ffffff;
+    color: #e20514;
+    border: 1px solid #e20514;
+    border-radius: 10px;
+    width: auto; 
+    height: auto; 
+    margin-left: 20px;
+    margin-right: 25px;
+}
+    
+.page {
+    display: none;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+    pointer-events: none;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.menu-buttons {
+    opacity: 0;
+    transform: translateY(20px);
+    margin: 12px;
+    height: 50px;
+    font-size: 20px;
+    width: 1px;
+}
+
+.menu-buttons.show-buttons {
+    animation: fadeUp 0.5s ease forwards;
+}
+
+#menu button {
+    background-color: #ffffff !important;
+    color: #e20514 !important;
+    border: 3px solid #e20514 !important;
+    font-family: 'Insanibu', sans-serif;
+    border-radius: 10px;
+}
+
+#menu button:hover {
+    background-color: #e20514 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+#menu {
+    background-image: url("Backgrounds/Menu.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#menu.show {
+    overflow: hidden;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 120px;
+    justify-items: center;
+}
+
+.menu-container button {
+    width: 345px;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#pageTransition {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-family: 'Insanibu', sans-serif;
+    color: #ffffff;
+    opacity: 0.7;
+    transition: 0.3s;
+    border-top: 1px solid #ffffff;
+    padding-top: 5px;
+    z-index: 1000;
+    animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+.footer:hover {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.08);    
+}
+
+.header-content {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -20px);
+    opacity: 0;
+}
+
+.header-content.show-title {
+    animation: titleFade 0.4s ease forwards;
+}
+
+@keyframes titleFade {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <div class="footer">
+        JKT48 WEBSITE FANS VERSION
+    </div>
+
+    <div id="pageTransition"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="Musik/Home.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="menu" class="page show">
+
+        <!-- HEADER -->
+        <div class="top-header">
+
+            <button id="btnBack" class="header-btn show-header-btn">
+                < KEMBALI
+            </button>
+
+            <div class="header-content">
+                Jakarta48 - Indonesia
+            </div>
+
+            <button id="btnHelp" class="header-btn show-header-btn">
+                BANTUAN ?
+            </button>
+
+        </div>
+
+        <!-- MENU -->
+        <div class="menu-container">
+
+            <button class="menu-buttons">NEWS</button>
+            <button class="menu-buttons"
+                onclick="goMember('members.html')">
+                MEMBER
+            </button>
+
+            <button class="menu-buttons">SCHEDULE</button>
+            <button class="menu-buttons">DISCOGRAPHY</button>
+
+            <button class="menu-buttons">THEATER</button>
+            <button class="menu-buttons">TEAMS HISTORY</button>
+
+            <button class="menu-buttons"
+                onclick="window.location.href='sistergroup.html'">
+                SISTER GROUP
+            </button>
+
+            <button class="menu-buttons"
+                onclick="openWithDelay()">
+                REQUEST HOUR 2026
+            </button>
+
+        </div>
+
+    </div>
+
+<script>
+
+    document.getElementById("btnBack").addEventListener("click", () => {
+    window.location.href = "index.html";
+    });
+
+    const audio = document.getElementById("bgMusic");
+    audio.volume = 0.5;
+
+    window.addEventListener("DOMContentLoaded", () => {
+        audio.play().catch(() => {
+            console.log("Autoplay diblokir, tunggu klik user");
+        });
+    });
+
+    document.addEventListener("click", () => {
+        if (audio.paused) {
+            audio.play();
+        }
+    }, { once: true });
+
+    document.getElementById("btnBack").addEventListener("click", () => {
+    const transition = document.getElementById("pageTransition");
+        transition.style.opacity = "1";
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 400);
+    });
+
+    function goToPage(url) {
+    const transition = document.getElementById("pageTransition");
+
+        transition.style.opacity = "1";
+
+        setTimeout(() => {
+            window.location.href = url;
+        }, 400);
+    }
+
+    function openWithDelay() {
+        setTimeout(() => {
+            window.open("https://rh26.jkt48.com", "_blank");
+        }, 300);
+    }
+    
+    window.addEventListener("DOMContentLoaded", () => {
+
+    const header = document.querySelector(".top-header");
+    const footer = document.querySelector(".footer");
+    const title = document.querySelector(".header-content");
+    const headerBtns = document.querySelectorAll(".header-btn");
+    const menuBtns = document.querySelectorAll(".menu-buttons");
+
+        setTimeout(() => {
+            header.classList.add("show-header");
+            footer.style.opacity = "0.5";
+        }, 50);
+
+        setTimeout(() => {
+            title.classList.add("show-title");
+        }, 200);
+
+        setTimeout(() => {
+            headerBtns.forEach((btn, i) => {
+                setTimeout(() => {
+                    btn.classList.add("show-header-btn");
+                }, i * 120);
+            });
+        }, 300);
+
+        setTimeout(() => {
+            menuBtns.forEach((btn, i) => {
+                setTimeout(() => {
+                    btn.classList.add("show-buttons");
+                }, i * 100);
+            });
+        }, 400);
+
+    });
+
+    function goMember() {
+        const transition = document.getElementById("pageTransition");
+        const bgm = document.getElementById("bgMusic");
+
+        let fade = setInterval(() => {
+            if (bgm.volume > 0.5) {
+                bgm.volume -= 0.5;
+            } else {
+                bgm.pause();
+                clearInterval(fade);
+            }
+        }, 50);
+
+        transition.style.opacity = "1";
+
+        setTimeout(() => {
+            window.location.href = "members.html";
+        }, 500);
+    }
+
+</script>
+
+</body>
