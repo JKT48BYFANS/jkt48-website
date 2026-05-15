@@ -891,6 +891,12 @@
                 object-fit: contain;
             }
 
+            .mobile-menu-btn,
+            .mobile-nav-panel {
+                display: none;
+            }
+
+
 /* ================= RESPONSIVE KHUSUS HALAMAN MEMBER ================= */
 
     @media (max-width: 768px) {
@@ -915,17 +921,72 @@
         width: 100%;
         max-width: 100vw;
         overflow: hidden;
-        justify-content: center;
-        padding: 10px 4px;
-        gap: 3px;
+        justify-content: space-between;
+        padding: 10px 8px;
+        gap: 0;
     }
 
-    .header-left,
+    .top-header > .header-btn:not(.header-left) {
+        display: none;
+    }
+
+    .header-left {
+        position: static;
+        display: block;
+        font-size: 10px;
+        padding: 6px 9px;
+    }
+
     .header-right {
         position: static;
         display: flex;
-        gap: 3px;
-        flex-shrink: 0;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .mobile-menu-btn {
+        display: inline-block;
+    }
+
+    .desktop-help {
+        display: none !important;
+    }
+
+    #muteBtn,
+    #mobileMenuBtn {
+        display: inline-block;
+        min-width: 38px;
+        font-size: 17px;
+        padding: 5px 8px;
+    }
+
+    .mobile-nav-panel {
+        position: fixed;
+        top: 52px;
+        right: 8px;
+        width: 190px;
+        display: none;
+        flex-direction: column;
+        gap: 7px;
+        padding: 10px;
+        background: white;
+        border: 2px solid #e20514;
+        border-radius: 10px;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.45);
+        z-index: 9999;
+    }
+
+    .mobile-nav-panel.show {
+        display: flex;
+    }
+
+    .mobile-nav-panel .header-btn {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        font-size: 10px;
+        padding: 7px 8px;
+        border-width: 2px;
     }
 
     .header-btn {
@@ -1164,12 +1225,26 @@
                     </button>
 
                     <div class="header-right">
+                        <button class="header-btn mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">☰</button>
                         <button class="header-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
-                        <button class="header-btn" onclick="alert('Bantuan belum tersedia')">
+                        <button class="header-btn desktop-help" onclick="alert('Bantuan belum tersedia')">
                             BANTUAN ? 
                         </button>
                     </div>
                 </div>
+
+                <div class="mobile-nav-panel" id="mobileNavPanel">
+                    <button class="header-btn" onclick="alert('Belum tersedia')">NEWS</button>
+                    <button class="header-btn" onclick="alert('Belum tersedia')">SCHEDULE</button>
+                    <button class="header-btn" onclick="alert('Belum tersedia')">THEATER</button>
+                    <button class="header-btn" onclick="goToMember()">MEMBER</button>
+                    <button class="header-btn" onclick="alert('Belum tersedia')">SISTER GROUP</button>
+                    <button class="header-btn" onclick="goToSongs()">DISCOGRAPHY</button>
+                    <button class="header-btn" onclick="alert('Belum tersedia')">TEAMS HISTORY</button>
+                    <button class="header-btn" onclick="openWithDelay()">REQUEST HOUR 2026</button>
+                    <button class="header-btn" onclick="alert('Bantuan belum tersedia')">BANTUAN ?</button>
+                </div>
+
             </div>
 
             <button id="scrollTopBtn" onclick="scrollToTop()">⬆️</button>
@@ -1744,6 +1819,26 @@
 
             localStorage.setItem("bgm_muted", isMuted);
         }
+
+        function toggleMobileMenu() {
+            const panel = document.getElementById("mobileNavPanel");
+            panel.classList.toggle("show");
+        }
+
+        document.addEventListener("click", (e) => {
+            const panel = document.getElementById("mobileNavPanel");
+            const menuBtn = document.getElementById("mobileMenuBtn");
+
+            if (!panel || !menuBtn) return;
+
+            if (
+                window.innerWidth <= 768 &&
+                !panel.contains(e.target) &&
+                !menuBtn.contains(e.target)
+            ) {
+                panel.classList.remove("show");
+            }
+        });
 
     </script>
     </html>
