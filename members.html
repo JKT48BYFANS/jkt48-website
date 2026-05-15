@@ -1008,12 +1008,12 @@
 
     .filter-sticky-area {
         position: fixed;
-        top: 52px;
+        top: 46px;
         left: 0;
         width: 100%;
         padding: 0 8px;
         box-sizing: border-box;
-        z-index: 998;
+        z-index: 9998;
         pointer-events: none;
     }
 
@@ -1023,11 +1023,12 @@
         display: flex;
         flex-wrap: nowrap;
         gap: 8px;
-        padding: 8px;
+        padding: 7px 8px;
         box-sizing: border-box;
         overflow: visible;
         pointer-events: auto;
-    }
+        margin: 0 auto;
+}
 
     /* HP: semua filter disembunyikan dulu */
     .filter-wrapper .filter {
@@ -1060,9 +1061,9 @@
 
     /* saat menu dibuka, semua filter muncul */
     .filter-wrapper.open {
+        width: calc(100vw - 16px);
         flex-wrap: wrap;
         justify-content: center;
-        width: calc(100vw - 16px);
     }
 
     .filter-wrapper.open .filter {
@@ -1072,7 +1073,7 @@
     .filter {
         flex: 1 1 0;
         min-width: 0;
-        font-size: 7px;
+        font-size: 5px;
         padding: 6px 2px;
         letter-spacing: 0;
         border-width: 2px;
@@ -1080,7 +1081,7 @@
     }
 
     .title-box {
-        margin-top: 50px;
+        margin-top: 42px;
         max-width: calc(100vw - 96px);
         padding: 6px 8px;
     }
