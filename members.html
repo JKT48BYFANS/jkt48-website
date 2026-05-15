@@ -4,6 +4,8 @@
 
         <title>Member JKT48</title>
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <style>
 
             @font-face {
@@ -886,6 +888,182 @@
                 height: 90px;
                 object-fit: contain;
             }
+
+            /* ================= RESPONSIVE KHUSUS HALAMAN MEMBER ================= */
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+        background-attachment: scroll;
+    }
+
+    .content {
+        margin-top: 95px;
+        width: 100%;
+    }
+
+    .top-header {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 12px 10px;
+        gap: 8px;
+        box-sizing: border-box;
+        white-space: nowrap;
+    }
+
+    .top-header::-webkit-scrollbar {
+        display: none;
+    }
+
+    .header-left,
+    .header-right {
+        position: static;
+        display: flex;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .header-btn {
+        font-size: 11px;
+        padding: 6px 9px;
+        border-width: 2px;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    .title-box {
+        margin-top: 95px;
+        padding: 6px 10px;
+        max-width: calc(100% - 28px);
+        box-sizing: border-box;
+    }
+
+    .title {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    .main-title {
+        font-size: 32px;
+        letter-spacing: 0;
+        line-height: 1.1;
+    }
+
+    .profile-summary {
+        width: calc(100% - 28px);
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .summary-line {
+        white-space: normal;
+        font-size: 11px;
+        line-height: 1.6;
+        letter-spacing: 1px;
+    }
+
+    .filter-sticky-area {
+        position: sticky;
+        top: 58px;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .filter-wrapper {
+        width: 100%;
+        max-height: 112px;
+        overflow-y: auto;
+        gap: 8px;
+        padding: 10px;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+
+    .filter {
+        font-size: 11px;
+        padding: 8px 10px;
+        letter-spacing: 0.5px;
+        border-width: 2px;
+        margin: 0;
+    }
+
+    .team-slogan-card {
+        width: calc(100% - 28px);
+        max-width: none;
+        box-sizing: border-box;
+        margin-top: 8px;
+    }
+
+    .team-slogan-text {
+        font-size: 11px;
+        line-height: 1.5;
+        letter-spacing: 1px;
+    }
+
+    .team-logo {
+        width: 72px;
+        height: 72px;
+        top: 92px;
+        opacity: 0.9;
+    }
+
+    .team-logo.left {
+        left: 8px;
+    }
+
+    .team-logo.right {
+        right: 8px;
+    }
+
+    .member-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 10px;
+        padding: 18px 10px 45px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .member-card {
+        width: 100%;
+        max-width: 155px;
+        min-height: 220px;
+        padding: 12px 8px;
+        border-radius: 12px;
+        border-width: 2px;
+        box-sizing: border-box;
+    }
+
+    .member-card:hover {
+        transform: translateY(-5px) scale(1.02);
+    }
+
+    .member-photo {
+        height: 165px;
+        max-width: 100%;
+    }
+
+    .member-name {
+        font-size: 11px;
+        margin-top: 14px;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+        line-height: 1.25;
+    }
+
+    .member-gen {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    #scrollTopBtn {
+        right: 12px;
+        bottom: 14px;
+        font-size: 36px;
+    }
+}
+
 
         </style>
     </head>
